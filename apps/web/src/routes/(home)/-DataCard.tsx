@@ -8,7 +8,6 @@ import {
   CardTitle,
 } from "@workspace/ui/components/card"
 import { Progress } from "@workspace/ui/components/progress"
-
 import { Item, ItemContent, ItemTitle } from "@workspace/ui/components/item"
 
 const STOCKS = 24 as const
@@ -17,7 +16,7 @@ const GOAL = 200 as const
 
 function IntoItem({ text, value }: { text: string; value: string | number }) {
   return (
-    <Item className="h-full bg-background">
+    <Item className="bg-background">
       <ItemContent>
         <ItemTitle className="text-sm text-muted-foreground">{text}</ItemTitle>
         <p className="text-2xl">{value}</p>
