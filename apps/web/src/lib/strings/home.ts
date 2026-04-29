@@ -4,6 +4,7 @@ export const HOME_STRING = {
   eoi: {
     title: "רוצים להצטרף?",
     subtitle: "תרשמו בטופס הזה",
+    whatsapp: "הישארו מעודכנים",
   },
   card: {
     title: "התקדמות הגיוס",

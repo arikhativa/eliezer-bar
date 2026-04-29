@@ -16,6 +16,15 @@ export function EOISection() {
           </ExternalLink>
         </Button>
       </p>
+      <p className="text-lg">
+        {HOME_STRING.eoi.whatsapp}
+
+        <Button variant={"link"}>
+          <ExternalLink href="https://chat.whatsapp.com/G7dc7aC3qrH8iJ9knyGmD7">
+            Whatsapp Group
+          </ExternalLink>
+        </Button>
+      </p>
     </div>
   )
 }

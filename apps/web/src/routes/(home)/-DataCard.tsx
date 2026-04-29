@@ -46,7 +46,7 @@ export function DataCard() {
         <IntoItem text={HOME_STRING.card.items.stock.title} value={STOCKS} />
         <IntoItem
           text={HOME_STRING.card.items.loan.title}
-          value={HOME_STRING.card.items.loan.value}
+          value={`₪${HOME_STRING.card.items.loan.value}`}
         />
         <IntoItem
           text={HOME_STRING.card.items.investor.title}
