@@ -9,31 +9,31 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
 import { Route as PollIndexRouteImport } from './routes/poll/index'
+import { Route as homeIndexRouteImport } from './routes/(home)/index'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const PollIndexRoute = PollIndexRouteImport.update({
   id: '/poll/',
   path: '/poll/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const homeIndexRoute = homeIndexRouteImport.update({
+  id: '/(home)/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof homeIndexRoute
   '/poll/': typeof PollIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/': typeof homeIndexRoute
   '/poll': typeof PollIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/(home)/': typeof homeIndexRoute
   '/poll/': typeof PollIndexRoute
 }
 export interface FileRouteTypes {
@@ -41,23 +41,16 @@ export interface FileRouteTypes {
   fullPaths: '/' | '/poll/'
   fileRoutesByTo: FileRoutesByTo
   to: '/' | '/poll'
-  id: '__root__' | '/' | '/poll/'
+  id: '__root__' | '/(home)/' | '/poll/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  homeIndexRoute: typeof homeIndexRoute
   PollIndexRoute: typeof PollIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/poll/': {
       id: '/poll/'
       path: '/poll'
@@ -65,11 +58,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PollIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/(home)/': {
+      id: '/(home)/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof homeIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  homeIndexRoute: homeIndexRoute,
   PollIndexRoute: PollIndexRoute,
 }
 export const routeTree = rootRouteImport
