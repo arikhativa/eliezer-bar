@@ -1,1 +1,6 @@
-export const SIDEBAR_STRINGS = { home: "דף הבית", poll: "סקר שם" } as const
+export const SIDEBAR_STRINGS = {
+  title: "בר שכונתי קריית אליעזר",
+  subtitle: "קואופרטיב חיפאי",
+  home: "דף הבית",
+  poll: "סקר שם",
+} as const

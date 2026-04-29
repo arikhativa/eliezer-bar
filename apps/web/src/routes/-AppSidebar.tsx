@@ -15,7 +15,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@workspace/ui/components/sidebar"
-import { ChartColumn, Home, type LucideIcon } from "lucide-react"
+import { Beer, ChartColumn, Home, type LucideIcon } from "lucide-react"
 import { Fragment } from "react/jsx-runtime"
 
 interface SidebarItem {
@@ -44,7 +44,15 @@ export function AppSidebar() {
 
   return (
     <Sidebar side="right">
-      <SidebarHeader />
+      <SidebarHeader className="flex flex-row items-center justify-start gap-4 p-4">
+        <Beer className="text-primary" />
+        <div>
+          <p className="font-bold">{SIDEBAR_STRINGS.title}</p>
+          <p className="text-sm text-muted-foreground">
+            {SIDEBAR_STRINGS.subtitle}
+          </p>
+        </div>
+      </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
