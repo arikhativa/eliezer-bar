@@ -1,6 +1,10 @@
 export const HOME_STRING = {
   title: "בר שכונתי קריית אליעזר",
   subtitle: "ביחד נקים מרחב משותף לשכונה שלנו",
+  eoi: {
+    title: "רוצים להצטרף?",
+    subtitle: "תרשמו בטופס הזה",
+  },
   card: {
     title: "התקדמות הגיוס",
     subtitle: "בדרך ליעד שלנו",

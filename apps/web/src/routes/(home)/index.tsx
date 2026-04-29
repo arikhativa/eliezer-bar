@@ -1,5 +1,6 @@
 import { HOME_STRING } from "@/lib/strings/home"
 import { DataCard } from "@/routes/(home)/-DataCard"
+import { EOISection } from "@/routes/(home)/-EOISection"
 import { MainIssueCard } from "@/routes/(home)/-MainIssueCard"
 import { SolutionSection } from "@/routes/(home)/-SolutionSection"
 import { createFileRoute } from "@tanstack/react-router"
@@ -20,6 +21,7 @@ function HomeComponent() {
       <DataCard />
       <MainIssueCard />
       <SolutionSection />
+      <EOISection />
     </div>
   )
 }
