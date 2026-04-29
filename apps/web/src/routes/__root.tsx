@@ -1,4 +1,5 @@
-import { Link, Outlet, createRootRoute } from "@tanstack/react-router"
+import { AppSidebar } from "@/routes/-AppSidebar"
+import { Outlet, createRootRoute } from "@tanstack/react-router"
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -7,19 +8,10 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <>
-      <div className="flex gap-2 p-2 text-lg">
-        <Link
-          to="/"
-          activeProps={{
-            className: "font-bold",
-          }}
-          activeOptions={{ exact: true }}
-        >
-          Home
-        </Link>{" "}
-      </div>
-      <hr />
-      <Outlet />
+      <AppSidebar />
+      <main className="w-full">
+        <Outlet />
+      </main>
     </>
   )
 }
