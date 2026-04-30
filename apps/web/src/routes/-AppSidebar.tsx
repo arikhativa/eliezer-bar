@@ -1,16 +1,12 @@
-import { useLogout } from "@/hooks/useLogout"
-import { authQO } from "@/lib/queryOptions/auth"
-import { SIDEBAR_STRINGS } from "@/lib/strings/sidebar"
-import { isAdmin } from "@/lib/utils"
-import { useSuspenseQuery } from "@tanstack/react-query"
+import { useSuspenseQuery } from "@tanstack/react-query";
 import {
+  type FileRouteTypes,
   Link,
   useNavigate,
   useRouterState,
-  type FileRouteTypes,
-} from "@tanstack/react-router"
-import { Button } from "@workspace/ui/components/button"
-import { Separator } from "@workspace/ui/components/separator"
+} from "@tanstack/react-router";
+import { Button } from "@workspace/ui/components/button";
+import { Separator } from "@workspace/ui/components/separator";
 import {
   Sidebar,
   SidebarContent,
@@ -21,33 +17,37 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@workspace/ui/components/sidebar"
+} from "@workspace/ui/components/sidebar";
 import {
   Beer,
   ChartColumn,
   DatabaseIcon,
   Home,
   type LucideIcon,
-} from "lucide-react"
-import { Fragment } from "react/jsx-runtime"
+} from "lucide-react";
+import { Fragment } from "react/jsx-runtime";
+import { useLogout } from "@/hooks/useLogout";
+import { authQO } from "@/lib/queryOptions/auth";
+import { SIDEBAR_STRINGS } from "@/lib/strings/sidebar";
+import { isAdmin } from "@/lib/utils";
 
 interface SidebarItem {
-  title: string
-  to: FileRouteTypes["to"]
-  icon: LucideIcon
-  reqAuth: boolean
-  reqAdmin?: boolean
-  subItems?: Array<SidebarItem>
+  icon: LucideIcon;
+  reqAdmin?: boolean;
+  reqAuth: boolean;
+  subItems?: SidebarItem[];
+  title: string;
+  to: FileRouteTypes["to"];
 }
 
 export function AppSidebar() {
-  const router = useRouterState()
-  const logout = useLogout()
-  const { data: user } = useSuspenseQuery(authQO())
+  const router = useRouterState();
+  const logout = useLogout();
+  const { data: user } = useSuspenseQuery(authQO());
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const list: Array<SidebarItem> = [
+  const list: SidebarItem[] = [
     {
       title: SIDEBAR_STRINGS.home,
       to: "/",
@@ -67,7 +67,7 @@ export function AppSidebar() {
       reqAdmin: true,
       icon: DatabaseIcon,
     },
-  ]
+  ];
 
   return (
     <Sidebar side="right">
@@ -75,7 +75,7 @@ export function AppSidebar() {
         <Beer className="text-primary" />
         <div>
           <p className="font-bold">{SIDEBAR_STRINGS.title}</p>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-muted-foreground text-sm">
             {SIDEBAR_STRINGS.subtitle}
           </p>
         </div>
@@ -84,18 +84,18 @@ export function AppSidebar() {
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
-              {list.map((e, index) => (
-                <Fragment key={index}>
+              {list.map((e) => (
+                <Fragment key={e.title}>
                   <SidebarMenuItem className="px-2 py-1">
                     <SidebarMenuButton
+                      disabled={e.reqAuth ? !user : false}
+                      hidden={e.reqAdmin ? !isAdmin(user) : false}
                       isActive={router.location.pathname === e.to}
-                      disabled={!e.reqAuth ? false : !user}
-                      hidden={!e.reqAdmin ? false : !isAdmin(user)}
                       onClick={() => {
                         navigate({
                           to: e.to,
                           from: "/",
-                        })
+                        });
                       }}
                     >
                       <e.icon />
@@ -108,9 +108,9 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <Separator></Separator>
+      <Separator />
       <SidebarFooter className="pb-10">
-        {!!user ? (
+        {user ? (
           <Button onClick={logout}>{SIDEBAR_STRINGS.logout}</Button>
         ) : (
           <Button asChild>
@@ -119,5 +119,5 @@ export function AppSidebar() {
         )}
       </SidebarFooter>
     </Sidebar>
-  )
+  );
 }

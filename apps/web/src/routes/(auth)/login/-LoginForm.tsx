@@ -1,47 +1,49 @@
-import { useState } from "react"
-import { Button } from "@workspace/ui/components/button"
+import { Link, useNavigate } from "@tanstack/react-router";
+import { Button } from "@workspace/ui/components/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@workspace/ui/components/card"
-import { Input } from "@workspace/ui/components/input"
-import { Label } from "@workspace/ui/components/label"
-import { cn } from "@workspace/ui/lib/utils"
-import { supabase } from "@/lib/supabase/client"
-import { AUTH_STRING } from "@/lib/strings/auth"
-import { Link, useNavigate } from "@tanstack/react-router"
+} from "@workspace/ui/components/card";
+import { Input } from "@workspace/ui/components/input";
+import { Label } from "@workspace/ui/components/label";
+import { cn } from "@workspace/ui/lib/utils";
+import { useState } from "react";
+import { AUTH_STRING } from "@/lib/strings/auth";
+import { supabase } from "@/lib/supabase/client";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
-  const [email, setEmail] = useState("")
-  const navigate = useNavigate()
-  const [password, setPassword] = useState("")
-  const [error, setError] = useState<string | null>(null)
-  const [isLoading, setIsLoading] = useState(false)
+  const [email, setEmail] = useState("");
+  const navigate = useNavigate();
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = async (e: React.SubmitEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-    setError(null)
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
 
     try {
       const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
-      })
-      if (error) throw error
-      navigate({ to: "/" })
+      });
+      if (error) {
+        throw error;
+      }
+      navigate({ to: "/" });
     } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : "An error occurred")
+      setError(error instanceof Error ? error.message : "An error occurred");
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -57,11 +59,11 @@ export function LoginForm({
                 <Label htmlFor="email">{AUTH_STRING.email}</Label>
                 <Input
                   id="email"
-                  type="email"
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="m@example.com"
                   required
+                  type="email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div className="grid gap-2">
@@ -70,23 +72,23 @@ export function LoginForm({
                 </div>
                 <Input
                   id="password"
-                  type="password"
-                  required
-                  value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  required
+                  type="password"
+                  value={password}
                 />
-                <Button variant={"link"} asChild>
+                <Button asChild variant={"link"}>
                   <Link to={"/forgot-password"}>{AUTH_STRING.forgotPass}</Link>
                 </Button>
               </div>
-              {error && <p className="text-sm text-red-500">{error}</p>}
-              <Button type="submit" className="w-full" disabled={isLoading}>
+              {error && <p className="text-red-500 text-sm">{error}</p>}
+              <Button className="w-full" disabled={isLoading} type="submit">
                 {isLoading ? AUTH_STRING.loggingIn : AUTH_STRING.login}
               </Button>
             </div>
             <div className="mt-4 text-center text-sm">
               {AUTH_STRING.noAccount}
-              <Button variant={"link"} asChild>
+              <Button asChild variant={"link"}>
                 <Link to={"/sign-up"}>{AUTH_STRING.signUp}</Link>
               </Button>
             </div>
@@ -94,5 +96,5 @@ export function LoginForm({
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

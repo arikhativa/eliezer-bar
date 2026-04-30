@@ -1,5 +1,5 @@
-import { supabase } from "@/lib/supabase/client"
-import { queryOptions } from "@tanstack/react-query"
+import { queryOptions } from "@tanstack/react-query";
+import { supabase } from "@/lib/supabase/client";
 
 export function authQO() {
   return queryOptions({
@@ -7,24 +7,24 @@ export function authQO() {
     queryFn: async () => {
       const {
         data: { session },
-      } = await supabase.auth.getSession()
+      } = await supabase.auth.getSession();
 
       if (!session) {
-        return null
+        return null;
       }
 
       const {
         data: { user },
         error,
-      } = await supabase.auth.getUser()
+      } = await supabase.auth.getUser();
 
       if (error) {
-        console.error("authQO: ", error)
-        throw error
+        console.error("authQO: ", error);
+        throw error;
       }
 
-      return user
+      return user;
     },
     retry: 1,
-  })
+  });
 }

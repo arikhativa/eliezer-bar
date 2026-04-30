@@ -6,4 +6,4 @@ export const SIDEBAR_STRINGS = {
   hameData: "עריכת דף בית",
   login: "התחבר",
   logout: "התנתק",
-} as const
+} as const;

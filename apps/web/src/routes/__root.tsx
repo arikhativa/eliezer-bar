@@ -1,9 +1,9 @@
-import { AppSidebar } from "@/routes/-AppSidebar"
-import { Outlet, createRootRoute } from "@tanstack/react-router"
+import { createRootRoute, Outlet } from "@tanstack/react-router";
+import { AppSidebar } from "@/routes/-AppSidebar";
 
 export const Route = createRootRoute({
   component: RootComponent,
-})
+});
 
 function RootComponent() {
   return (
@@ -13,5 +13,5 @@ function RootComponent() {
         <Outlet />
       </main>
     </>
-  )
+  );
 }

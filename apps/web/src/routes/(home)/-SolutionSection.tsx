@@ -1,16 +1,16 @@
-import { HOME_STRING } from "@/lib/strings/home"
-import { TypographyH2 } from "@workspace/ui/components/TypographyH2"
-import { Card, CardContent } from "@workspace/ui/components/card"
-import { Heart, Store, TrendingUp, Users, type LucideIcon } from "lucide-react"
+import { Card, CardContent } from "@workspace/ui/components/card";
+import { TypographyH2 } from "@workspace/ui/components/TypographyH2";
+import { Heart, type LucideIcon, Store, TrendingUp, Users } from "lucide-react";
+import { HOME_STRING } from "@/lib/strings/home";
 
 function IntoItem({
   title,
   subtitle,
   icon: Icon,
 }: {
-  title: string
-  subtitle: string
-  icon: LucideIcon
+  title: string;
+  subtitle: string;
+  icon: LucideIcon;
 }) {
   return (
     <Card className="flex-1">
@@ -18,11 +18,11 @@ function IntoItem({
         <div className="flex aspect-square w-16 items-center justify-center rounded-full border-2 bg-background">
           <Icon className="text-primary" size={30} />
         </div>
-        <p className="text-center text-xl font-bold">{title}</p>
+        <p className="text-center font-bold text-xl">{title}</p>
         <p className="text-center text-muted-foreground">{subtitle}</p>
       </CardContent>
     </Card>
-  )
+  );
 }
 
 export function SolutionSection() {
@@ -36,5 +36,5 @@ export function SolutionSection() {
         <IntoItem icon={Heart} {...HOME_STRING.solution.effect} />
       </div>
     </div>
-  )
+  );
 }

@@ -54,4 +54,4 @@ export const HOME_STRING = {
       subtitle: "אנחנו הבעלים. אנחנו קובעים את האופי של ירושלים.",
     },
   },
-} as const
+} as const;

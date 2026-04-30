@@ -1,7 +1,7 @@
-import { ExternalLink } from "@/components/ExternalLink"
-import { HOME_STRING } from "@/lib/strings/home"
-import { Button } from "@workspace/ui/components/button"
-import { TypographyH2 } from "@workspace/ui/components/TypographyH2"
+import { Button } from "@workspace/ui/components/button";
+import { TypographyH2 } from "@workspace/ui/components/TypographyH2";
+import { ExternalLink } from "@/components/ExternalLink";
+import { HOME_STRING } from "@/lib/strings/home";
 
 export function EOISection() {
   return (
@@ -26,5 +26,5 @@ export function EOISection() {
         </Button>
       </p>
     </div>
-  )
+  );
 }

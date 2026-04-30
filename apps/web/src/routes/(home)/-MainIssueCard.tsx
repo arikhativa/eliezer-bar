@@ -1,13 +1,13 @@
-import { HOME_STRING } from "@/lib/strings/home"
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "@workspace/ui/components/card"
-import { Item, ItemContent, ItemTitle } from "@workspace/ui/components/item"
-import { TypographyH2 } from "@workspace/ui/components/TypographyH2"
-import { Quote } from "lucide-react"
+} from "@workspace/ui/components/card";
+import { Item, ItemContent, ItemTitle } from "@workspace/ui/components/item";
+import { TypographyH2 } from "@workspace/ui/components/TypographyH2";
+import { Quote } from "lucide-react";
+import { HOME_STRING } from "@/lib/strings/home";
 
 export function MainIssueCard() {
   return (
@@ -22,8 +22,8 @@ export function MainIssueCard() {
         <Item className="bg-background">
           <ItemContent className="relative space-y-2 p-8">
             <Quote className="absolute top-0 right-0" />
-            <ItemTitle className="text-sm text-muted-foreground">
-              <p className="text-center text-xl text-foreground">{`"${HOME_STRING.issueCard.quote}"`}</p>
+            <ItemTitle className="text-muted-foreground text-sm">
+              <p className="text-center text-foreground text-xl">{`"${HOME_STRING.issueCard.quote}"`}</p>
             </ItemTitle>
             <p className="text-center text-lg">
               {HOME_STRING.issueCard.quoteName}
@@ -32,5 +32,5 @@ export function MainIssueCard() {
         </Item>
       </CardContent>
     </Card>
-  )
+  );
 }

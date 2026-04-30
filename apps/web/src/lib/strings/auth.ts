@@ -7,4 +7,4 @@ export const AUTH_STRING = {
   noAccount: "אין לך חשבון?",
   signUp: "התחבר",
   loggingIn: "מתחבר...",
-} as const
+} as const;

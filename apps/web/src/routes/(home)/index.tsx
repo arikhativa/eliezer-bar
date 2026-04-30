@@ -1,15 +1,15 @@
-import { HOME_STRING } from "@/lib/strings/home"
-import { DataCard } from "@/routes/(home)/-DataCard"
-import { EOISection } from "@/routes/(home)/-EOISection"
-import { MainIssueCard } from "@/routes/(home)/-MainIssueCard"
-import { SolutionSection } from "@/routes/(home)/-SolutionSection"
-import { createFileRoute } from "@tanstack/react-router"
-import { TypographyH1 } from "@workspace/ui/components/TypographyH1"
-import { TypographyH2 } from "@workspace/ui/components/TypographyH2"
+import { createFileRoute } from "@tanstack/react-router";
+import { TypographyH1 } from "@workspace/ui/components/TypographyH1";
+import { TypographyH2 } from "@workspace/ui/components/TypographyH2";
+import { HOME_STRING } from "@/lib/strings/home";
+import { DataCard } from "@/routes/(home)/-DataCard";
+import { EOISection } from "@/routes/(home)/-EOISection";
+import { MainIssueCard } from "@/routes/(home)/-MainIssueCard";
+import { SolutionSection } from "@/routes/(home)/-SolutionSection";
 
 export const Route = createFileRoute("/(home)/")({
   component: HomeComponent,
-})
+});
 
 function HomeComponent() {
   return (
@@ -23,5 +23,5 @@ function HomeComponent() {
       <SolutionSection />
       <EOISection />
     </div>
-  )
+  );
 }

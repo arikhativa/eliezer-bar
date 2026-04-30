@@ -1,15 +1,15 @@
-import { supabase } from "@/lib/supabase/client"
-import { queryOptions } from "@tanstack/react-query"
-import { z } from "zod"
+import { queryOptions } from "@tanstack/react-query";
+import { z } from "zod";
+import { supabase } from "@/lib/supabase/client";
 
-export const HOMEPAGE_KEY = "homepage"
+export const HOMEPAGE_KEY = "homepage";
 
 const homepageSchema = z.object({
   id: z.number(),
   memberCount: z.number(),
-})
+});
 
-export type HomepageSchema = z.infer<typeof homepageSchema>
+export type HomepageSchema = z.infer<typeof homepageSchema>;
 
 export function homepageQO() {
   return queryOptions({
@@ -18,12 +18,14 @@ export function homepageQO() {
       const { data, error } = await supabase
         .from("homepage")
         .select("*")
-        .single()
+        .single();
 
-      if (error) throw error
+      if (error) {
+        throw error;
+      }
 
-      return homepageSchema.parse(data)
+      return homepageSchema.parse(data);
     },
     retry: 1,
-  })
+  });
 }

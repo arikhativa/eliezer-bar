@@ -1,42 +1,43 @@
-import { useState } from "react"
-
-import { Button } from "@workspace/ui/components/button"
+import { Button } from "@workspace/ui/components/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@workspace/ui/components/card"
-import { Input } from "@workspace/ui/components/input"
-import { Label } from "@workspace/ui/components/label"
-import { supabase } from "@/lib/supabase/client"
-import { cn } from "@workspace/ui/lib/utils"
+} from "@workspace/ui/components/card";
+import { Input } from "@workspace/ui/components/input";
+import { Label } from "@workspace/ui/components/label";
+import { cn } from "@workspace/ui/lib/utils";
+import { useState } from "react";
+import { supabase } from "@/lib/supabase/client";
 
 export function UpdatePasswordForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
-  const [password, setPassword] = useState("")
-  const [error, setError] = useState<string | null>(null)
-  const [isLoading, setIsLoading] = useState(false)
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleForgotPassword = async (e: React.SubmitEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-    setError(null)
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
 
     try {
-      const { error } = await supabase.auth.updateUser({ password })
-      if (error) throw error
+      const { error } = await supabase.auth.updateUser({ password });
+      if (error) {
+        throw error;
+      }
       // Update this route to redirect to an authenticated route. The user already has an active session.
-      location.href = "/protected"
+      location.href = "/protected";
     } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : "An error occurred")
+      setError(error instanceof Error ? error.message : "An error occurred");
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -54,15 +55,15 @@ export function UpdatePasswordForm({
                 <Label htmlFor="password">New password</Label>
                 <Input
                   id="password"
-                  type="password"
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="New password"
                   required
+                  type="password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-              {error && <p className="text-sm text-red-500">{error}</p>}
-              <Button type="submit" className="w-full" disabled={isLoading}>
+              {error && <p className="text-red-500 text-sm">{error}</p>}
+              <Button className="w-full" disabled={isLoading} type="submit">
                 {isLoading ? "Saving..." : "Save new password"}
               </Button>
             </div>
@@ -70,5 +71,5 @@ export function UpdatePasswordForm({
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
