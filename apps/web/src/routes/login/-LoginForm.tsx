@@ -11,6 +11,8 @@ import { Input } from "@workspace/ui/components/input"
 import { Label } from "@workspace/ui/components/label"
 import { cn } from "@workspace/ui/lib/utils"
 import { supabase } from "@/lib/supabase/client"
+import { AUTH_STRING } from "@/lib/strings/auth"
+import { Link } from "@tanstack/react-router"
 
 export function LoginForm({
   className,
@@ -32,7 +34,7 @@ export function LoginForm({
         password,
       })
       if (error) throw error
-      location.href = "/protected"
+      location.href = "/home"
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : "An error occurred")
     } finally {
@@ -44,16 +46,14 @@ export function LoginForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl">Login</CardTitle>
-          <CardDescription>
-            Enter your email below to login to your account
-          </CardDescription>
+          <CardTitle className="text-2xl">{AUTH_STRING.login}</CardTitle>
+          <CardDescription>{AUTH_STRING.addEmail}</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleLogin}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">{AUTH_STRING.email}</Label>
                 <Input
                   id="email"
                   type="email"
@@ -65,13 +65,7 @@ export function LoginForm({
               </div>
               <div className="grid gap-2">
                 <div className="flex items-center">
-                  <Label htmlFor="password">Password</Label>
-                  <a
-                    href="/forgot-password"
-                    className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                  >
-                    Forgot your password?
-                  </a>
+                  <Label htmlFor="password">{AUTH_STRING.pass}</Label>
                 </div>
                 <Input
                   id="password"
@@ -80,6 +74,9 @@ export function LoginForm({
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
+                <Button variant={"link"} asChild>
+                  <Link to={"/forgot-password"}>{AUTH_STRING.forgotPass}</Link>
+                </Button>
               </div>
               {error && <p className="text-sm text-red-500">{error}</p>}
               <Button type="submit" className="w-full" disabled={isLoading}>
@@ -87,10 +84,10 @@ export function LoginForm({
               </Button>
             </div>
             <div className="mt-4 text-center text-sm">
-              Don&apos;t have an account?{" "}
-              <a href="/sign-up" className="underline underline-offset-4">
-                Sign up
-              </a>
+              {AUTH_STRING.noAccount}
+              <Button variant={"link"} asChild>
+                <Link to={"/sign-up"}>{AUTH_STRING.signUp}</Link>
+              </Button>
             </div>
           </form>
         </CardContent>
