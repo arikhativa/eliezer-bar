@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PollIndexRouteImport } from './routes/poll/index'
+import { Route as LoginIndexRouteImport } from './routes/login/index'
 import { Route as homeIndexRouteImport } from './routes/(home)/index'
 
 const PollIndexRoute = PollIndexRouteImport.update({
   id: '/poll/',
   path: '/poll/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginIndexRoute = LoginIndexRouteImport.update({
+  id: '/login/',
+  path: '/login/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const homeIndexRoute = homeIndexRouteImport.update({
@@ -25,27 +31,31 @@ const homeIndexRoute = homeIndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof homeIndexRoute
+  '/login/': typeof LoginIndexRoute
   '/poll/': typeof PollIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof homeIndexRoute
+  '/login': typeof LoginIndexRoute
   '/poll': typeof PollIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/(home)/': typeof homeIndexRoute
+  '/login/': typeof LoginIndexRoute
   '/poll/': typeof PollIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/poll/'
+  fullPaths: '/' | '/login/' | '/poll/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/poll'
-  id: '__root__' | '/(home)/' | '/poll/'
+  to: '/' | '/login' | '/poll'
+  id: '__root__' | '/(home)/' | '/login/' | '/poll/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   homeIndexRoute: typeof homeIndexRoute
+  LoginIndexRoute: typeof LoginIndexRoute
   PollIndexRoute: typeof PollIndexRoute
 }
 
@@ -56,6 +66,13 @@ declare module '@tanstack/react-router' {
       path: '/poll'
       fullPath: '/poll/'
       preLoaderRoute: typeof PollIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login/': {
+      id: '/login/'
+      path: '/login'
+      fullPath: '/login/'
+      preLoaderRoute: typeof LoginIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/(home)/': {
@@ -70,6 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   homeIndexRoute: homeIndexRoute,
+  LoginIndexRoute: LoginIndexRoute,
   PollIndexRoute: PollIndexRoute,
 }
 export const routeTree = rootRouteImport

@@ -1,4 +1,6 @@
+import { authQO } from "@/lib/queryOptions/auth"
 import { SIDEBAR_STRINGS } from "@/lib/strings/sidebar"
+import { useSuspenseQuery } from "@tanstack/react-query"
 import {
   useNavigate,
   useRouterState,
@@ -22,22 +24,26 @@ interface SidebarItem {
   title: string
   to: FileRouteTypes["to"]
   icon: LucideIcon
+  reqAuth: boolean
   subItems?: Array<SidebarItem>
 }
 
 export function AppSidebar() {
   const router = useRouterState()
+  const { data: user } = useSuspenseQuery(authQO())
   const navigate = useNavigate()
 
   const list: Array<SidebarItem> = [
     {
       title: SIDEBAR_STRINGS.home,
       to: "/",
+      reqAuth: false,
       icon: Home,
     },
     {
       title: SIDEBAR_STRINGS.poll,
       to: "/poll",
+      reqAuth: true,
       icon: ChartColumn,
     },
   ]
@@ -62,6 +68,7 @@ export function AppSidebar() {
                   <SidebarMenuItem className="px-2 py-1">
                     <SidebarMenuButton
                       isActive={router.location.pathname === e.to}
+                      disabled={!e.reqAuth ? false : !user}
                       onClick={() => {
                         navigate({
                           to: e.to,
