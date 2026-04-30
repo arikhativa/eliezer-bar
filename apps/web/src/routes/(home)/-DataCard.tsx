@@ -1,3 +1,4 @@
+import { useSuspenseQuery } from "@tanstack/react-query";
 import {
   Card,
   CardContent,
@@ -8,11 +9,11 @@ import {
 } from "@workspace/ui/components/card";
 import { Item, ItemContent, ItemTitle } from "@workspace/ui/components/item";
 import { Progress } from "@workspace/ui/components/progress";
+import { homepageQO } from "@/lib/queryOptions/homepage";
 import { HOME_STRING } from "@/lib/strings/home";
 
-const STOCKS = 24 as const;
-const PROGRESS_PRE_CENT = STOCKS / 2;
-const GOAL = 200 as const;
+const STOCK_PRICE = 500 as const;
+const GOAL = 200_000 as const;
 
 function IntoItem({ text, value }: { text: string; value: string | number }) {
   return (
@@ -26,6 +27,12 @@ function IntoItem({ text, value }: { text: string; value: string | number }) {
 }
 
 export function DataCard() {
+  const { data } = useSuspenseQuery(homepageQO());
+
+  const stockSum = data.memberCount * STOCK_PRICE;
+  const currentFunds = stockSum + data.loanSum;
+  const currentFundsPercent = (currentFunds / GOAL) * 100;
+
   return (
     <Card className="w-full max-w-3xl">
       <CardHeader className="flex justify-between">
@@ -33,28 +40,31 @@ export function DataCard() {
           <CardTitle>{HOME_STRING.card.title}</CardTitle>
           <CardDescription>{HOME_STRING.card.subtitle}</CardDescription>
         </div>
-        <p className="font-bold text-2xl">{`${PROGRESS_PRE_CENT}%`}</p>
+        <p className="font-bold text-2xl">{`${currentFundsPercent}%`}</p>
       </CardHeader>
       <CardContent className="space-y-2">
-        <Progress className="rtl:rotate-180" value={PROGRESS_PRE_CENT} />
+        <Progress className="rtl:rotate-180" value={currentFundsPercent} />
         <div className="flex justify-between">
-          <span>{PROGRESS_PRE_CENT / 2}</span>
-          <span>{GOAL}</span>
+          <span>{`₪${currentFunds.toLocaleString()}`}</span>
+          <span>{`₪${GOAL.toLocaleString()}`}</span>
         </div>
       </CardContent>
       <CardFooter className="grid grid-cols-2 gap-2">
-        <IntoItem text={HOME_STRING.card.items.stock.title} value={STOCKS} />
-        <IntoItem
-          text={HOME_STRING.card.items.loan.title}
-          value={`₪${HOME_STRING.card.items.loan.value}`}
-        />
         <IntoItem
           text={HOME_STRING.card.items.investor.title}
-          value={HOME_STRING.card.items.investor.value}
+          value={data.investorCount}
+        />
+        <IntoItem
+          text={HOME_STRING.card.items.loan.title}
+          value={`₪${data.loanSum.toLocaleString()}`}
         />
         <IntoItem
           text={HOME_STRING.card.items.members.title}
-          value={HOME_STRING.card.items.members.value}
+          value={data?.memberCount}
+        />
+        <IntoItem
+          text={HOME_STRING.card.items.stock.title}
+          value={`₪${stockSum.toLocaleString()}`}
         />
       </CardFooter>
     </Card>

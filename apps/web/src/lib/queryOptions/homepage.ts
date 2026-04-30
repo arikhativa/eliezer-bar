@@ -7,6 +7,8 @@ export const HOMEPAGE_KEY = "homepage";
 const homepageSchema = z.object({
   id: z.number(),
   memberCount: z.number(),
+  investorCount: z.number(),
+  loanSum: z.number(),
 });
 
 export type HomepageSchema = z.infer<typeof homepageSchema>;

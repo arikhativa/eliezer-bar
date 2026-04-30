@@ -34,7 +34,7 @@ createRoot(root).render(
     <ThemeProvider>
       <TooltipProvider>
         <QueryClientProvider client={queryClient}>
-          <Toaster />
+          <Toaster dir="rtl" position="bottom-left" />
           <SidebarProvider>
             <RouterProvider router={router} />
           </SidebarProvider>

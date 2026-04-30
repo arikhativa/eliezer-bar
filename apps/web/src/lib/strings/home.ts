@@ -15,15 +15,12 @@ export const HOME_STRING = {
       },
       loan: {
         title: "סה״כ הלוואות",
-        value: "27,000",
       },
       investor: {
         title: "משקיעים",
-        value: "17",
       },
       members: {
         title: "חברים פוטנציאלים באגודה",
-        value: "45",
       },
     },
   },

@@ -5,16 +5,13 @@ import {
   useSuspenseQuery,
 } from "@tanstack/react-query";
 import { Button } from "@workspace/ui/components/button";
-import {
-  Field,
-  FieldDescription,
-  FieldError,
-  FieldLabel,
-} from "@workspace/ui/components/field";
+import { Field, FieldError, FieldLabel } from "@workspace/ui/components/field";
 import { Input } from "@workspace/ui/components/input";
 import { toast } from "sonner";
 import { z } from "zod";
 import { HOMEPAGE_KEY, homepageQO } from "@/lib/queryOptions/homepage";
+import { DATA_FORM_STRING } from "@/lib/strings/dataForm";
+import { GENERAL_STRINGS } from "@/lib/strings/general";
 import { supabase } from "@/lib/supabase/client";
 
 const formSchema = z.object({
@@ -32,19 +29,16 @@ export function HomePageDataForm() {
 
   const mutation = useMutation({
     mutationFn: async (values: FormSchema) => {
-      const tmp = await supabase
+      await supabase
         .from("homepage")
         .update({ memberCount: values.memberCount })
         .eq("id", 1);
 
-      if (tmp.error) {
-        throw tmp.error;
-      }
       return values;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [HOMEPAGE_KEY] });
-      toast.success("Member count updated");
+      toast.success(DATA_FORM_STRING.toast);
     },
     onError: (error) => {
       toast.error(error.message);
@@ -75,10 +69,12 @@ export function HomePageDataForm() {
             field.state.meta.isTouched && !field.state.meta.isValid;
           return (
             <Field data-invalid={isInvalid}>
-              <FieldLabel htmlFor="memberCount">Member Count</FieldLabel>
+              <FieldLabel htmlFor={field.name}>
+                {DATA_FORM_STRING[field.name]}
+              </FieldLabel>
               <Input
                 aria-invalid={isInvalid}
-                id="memberCount"
+                id={field.name}
                 name={field.name}
                 onBlur={field.handleBlur}
                 onChange={(e) => field.handleChange(Number(e.target.value))}
@@ -86,13 +82,12 @@ export function HomePageDataForm() {
                 type="number"
                 value={field.state.value}
               />
-              <FieldDescription>Enter total number of members</FieldDescription>
               {isInvalid && <FieldError errors={field.state.meta.errors} />}
             </Field>
           );
         }}
       </form.Field>
-      <Button type="submit">Save</Button>
+      <Button type="submit">{GENERAL_STRINGS.save}</Button>
     </form>
   );
 }
