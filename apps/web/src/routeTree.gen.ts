@@ -13,11 +13,12 @@ import { Route as protectedRouteRouteImport } from './routes/(protected)/route'
 import { Route as authRouteRouteImport } from './routes/(auth)/route'
 import { Route as PollIndexRouteImport } from './routes/poll/index'
 import { Route as homeIndexRouteImport } from './routes/(home)/index'
-import { Route as protectedHomePageDataIndexRouteImport } from './routes/(protected)/home-page-data/index'
+import { Route as protectedadminRouteRouteImport } from './routes/(protected)/(admin)/route'
 import { Route as authUpdatePasswordIndexRouteImport } from './routes/(auth)/update-password/index'
 import { Route as authSignUpIndexRouteImport } from './routes/(auth)/sign-up/index'
 import { Route as authLoginIndexRouteImport } from './routes/(auth)/login/index'
 import { Route as authForgotPasswordIndexRouteImport } from './routes/(auth)/forgot-password/index'
+import { Route as protectedadminHomePageDataIndexRouteImport } from './routes/(protected)/(admin)/home-page-data/index'
 
 const protectedRouteRoute = protectedRouteRouteImport.update({
   id: '/(protected)',
@@ -37,12 +38,10 @@ const homeIndexRoute = homeIndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const protectedHomePageDataIndexRoute =
-  protectedHomePageDataIndexRouteImport.update({
-    id: '/home-page-data/',
-    path: '/home-page-data/',
-    getParentRoute: () => protectedRouteRoute,
-  } as any)
+const protectedadminRouteRoute = protectedadminRouteRouteImport.update({
+  id: '/(admin)',
+  getParentRoute: () => protectedRouteRoute,
+} as any)
 const authUpdatePasswordIndexRoute = authUpdatePasswordIndexRouteImport.update({
   id: '/update-password/',
   path: '/update-password/',
@@ -63,6 +62,12 @@ const authForgotPasswordIndexRoute = authForgotPasswordIndexRouteImport.update({
   path: '/forgot-password/',
   getParentRoute: () => authRouteRoute,
 } as any)
+const protectedadminHomePageDataIndexRoute =
+  protectedadminHomePageDataIndexRouteImport.update({
+    id: '/home-page-data/',
+    path: '/home-page-data/',
+    getParentRoute: () => protectedadminRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof homeIndexRoute
@@ -71,7 +76,7 @@ export interface FileRoutesByFullPath {
   '/login/': typeof authLoginIndexRoute
   '/sign-up/': typeof authSignUpIndexRoute
   '/update-password/': typeof authUpdatePasswordIndexRoute
-  '/home-page-data/': typeof protectedHomePageDataIndexRoute
+  '/home-page-data/': typeof protectedadminHomePageDataIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof homeIndexRoute
@@ -80,19 +85,20 @@ export interface FileRoutesByTo {
   '/login': typeof authLoginIndexRoute
   '/sign-up': typeof authSignUpIndexRoute
   '/update-password': typeof authUpdatePasswordIndexRoute
-  '/home-page-data': typeof protectedHomePageDataIndexRoute
+  '/home-page-data': typeof protectedadminHomePageDataIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/(auth)': typeof authRouteRouteWithChildren
   '/(protected)': typeof protectedRouteRouteWithChildren
+  '/(protected)/(admin)': typeof protectedadminRouteRouteWithChildren
   '/(home)/': typeof homeIndexRoute
   '/poll/': typeof PollIndexRoute
   '/(auth)/forgot-password/': typeof authForgotPasswordIndexRoute
   '/(auth)/login/': typeof authLoginIndexRoute
   '/(auth)/sign-up/': typeof authSignUpIndexRoute
   '/(auth)/update-password/': typeof authUpdatePasswordIndexRoute
-  '/(protected)/home-page-data/': typeof protectedHomePageDataIndexRoute
+  '/(protected)/(admin)/home-page-data/': typeof protectedadminHomePageDataIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -117,13 +123,14 @@ export interface FileRouteTypes {
     | '__root__'
     | '/(auth)'
     | '/(protected)'
+    | '/(protected)/(admin)'
     | '/(home)/'
     | '/poll/'
     | '/(auth)/forgot-password/'
     | '/(auth)/login/'
     | '/(auth)/sign-up/'
     | '/(auth)/update-password/'
-    | '/(protected)/home-page-data/'
+    | '/(protected)/(admin)/home-page-data/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -163,11 +170,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof homeIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/(protected)/home-page-data/': {
-      id: '/(protected)/home-page-data/'
-      path: '/home-page-data'
-      fullPath: '/home-page-data/'
-      preLoaderRoute: typeof protectedHomePageDataIndexRouteImport
+    '/(protected)/(admin)': {
+      id: '/(protected)/(admin)'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof protectedadminRouteRouteImport
       parentRoute: typeof protectedRouteRoute
     }
     '/(auth)/update-password/': {
@@ -198,6 +205,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof authForgotPasswordIndexRouteImport
       parentRoute: typeof authRouteRoute
     }
+    '/(protected)/(admin)/home-page-data/': {
+      id: '/(protected)/(admin)/home-page-data/'
+      path: '/home-page-data'
+      fullPath: '/home-page-data/'
+      preLoaderRoute: typeof protectedadminHomePageDataIndexRouteImport
+      parentRoute: typeof protectedadminRouteRoute
+    }
   }
 }
 
@@ -219,12 +233,23 @@ const authRouteRouteWithChildren = authRouteRoute._addFileChildren(
   authRouteRouteChildren,
 )
 
+interface protectedadminRouteRouteChildren {
+  protectedadminHomePageDataIndexRoute: typeof protectedadminHomePageDataIndexRoute
+}
+
+const protectedadminRouteRouteChildren: protectedadminRouteRouteChildren = {
+  protectedadminHomePageDataIndexRoute: protectedadminHomePageDataIndexRoute,
+}
+
+const protectedadminRouteRouteWithChildren =
+  protectedadminRouteRoute._addFileChildren(protectedadminRouteRouteChildren)
+
 interface protectedRouteRouteChildren {
-  protectedHomePageDataIndexRoute: typeof protectedHomePageDataIndexRoute
+  protectedadminRouteRoute: typeof protectedadminRouteRouteWithChildren
 }
 
 const protectedRouteRouteChildren: protectedRouteRouteChildren = {
-  protectedHomePageDataIndexRoute: protectedHomePageDataIndexRoute,
+  protectedadminRouteRoute: protectedadminRouteRouteWithChildren,
 }
 
 const protectedRouteRouteWithChildren = protectedRouteRoute._addFileChildren(

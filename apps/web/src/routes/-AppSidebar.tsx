@@ -1,6 +1,7 @@
 import { useLogout } from "@/hooks/useLogout"
 import { authQO } from "@/lib/queryOptions/auth"
 import { SIDEBAR_STRINGS } from "@/lib/strings/sidebar"
+import { isAdmin } from "@/lib/utils"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import {
   Link,
@@ -21,7 +22,13 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@workspace/ui/components/sidebar"
-import { Beer, ChartColumn, Home, type LucideIcon } from "lucide-react"
+import {
+  Beer,
+  ChartColumn,
+  DatabaseIcon,
+  Home,
+  type LucideIcon,
+} from "lucide-react"
 import { Fragment } from "react/jsx-runtime"
 
 interface SidebarItem {
@@ -29,6 +36,7 @@ interface SidebarItem {
   to: FileRouteTypes["to"]
   icon: LucideIcon
   reqAuth: boolean
+  reqAdmin?: boolean
   subItems?: Array<SidebarItem>
 }
 
@@ -36,6 +44,7 @@ export function AppSidebar() {
   const router = useRouterState()
   const logout = useLogout()
   const { data: user } = useSuspenseQuery(authQO())
+
   const navigate = useNavigate()
 
   const list: Array<SidebarItem> = [
@@ -50,6 +59,13 @@ export function AppSidebar() {
       to: "/poll",
       reqAuth: true,
       icon: ChartColumn,
+    },
+    {
+      title: SIDEBAR_STRINGS.hameData,
+      to: "/home-page-data",
+      reqAuth: true,
+      reqAdmin: true,
+      icon: DatabaseIcon,
     },
   ]
 
@@ -74,6 +90,7 @@ export function AppSidebar() {
                     <SidebarMenuButton
                       isActive={router.location.pathname === e.to}
                       disabled={!e.reqAuth ? false : !user}
+                      hidden={!e.reqAdmin ? false : !isAdmin(user)}
                       onClick={() => {
                         navigate({
                           to: e.to,
