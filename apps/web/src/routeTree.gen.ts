@@ -9,14 +9,20 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as protectedRouteRouteImport } from './routes/(protected)/route'
 import { Route as authRouteRouteImport } from './routes/(auth)/route'
 import { Route as PollIndexRouteImport } from './routes/poll/index'
 import { Route as homeIndexRouteImport } from './routes/(home)/index'
+import { Route as protectedHomePageDataIndexRouteImport } from './routes/(protected)/home-page-data/index'
 import { Route as authUpdatePasswordIndexRouteImport } from './routes/(auth)/update-password/index'
 import { Route as authSignUpIndexRouteImport } from './routes/(auth)/sign-up/index'
 import { Route as authLoginIndexRouteImport } from './routes/(auth)/login/index'
 import { Route as authForgotPasswordIndexRouteImport } from './routes/(auth)/forgot-password/index'
 
+const protectedRouteRoute = protectedRouteRouteImport.update({
+  id: '/(protected)',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const authRouteRoute = authRouteRouteImport.update({
   id: '/(auth)',
   getParentRoute: () => rootRouteImport,
@@ -31,6 +37,12 @@ const homeIndexRoute = homeIndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const protectedHomePageDataIndexRoute =
+  protectedHomePageDataIndexRouteImport.update({
+    id: '/home-page-data/',
+    path: '/home-page-data/',
+    getParentRoute: () => protectedRouteRoute,
+  } as any)
 const authUpdatePasswordIndexRoute = authUpdatePasswordIndexRouteImport.update({
   id: '/update-password/',
   path: '/update-password/',
@@ -59,6 +71,7 @@ export interface FileRoutesByFullPath {
   '/login/': typeof authLoginIndexRoute
   '/sign-up/': typeof authSignUpIndexRoute
   '/update-password/': typeof authUpdatePasswordIndexRoute
+  '/home-page-data/': typeof protectedHomePageDataIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof homeIndexRoute
@@ -67,16 +80,19 @@ export interface FileRoutesByTo {
   '/login': typeof authLoginIndexRoute
   '/sign-up': typeof authSignUpIndexRoute
   '/update-password': typeof authUpdatePasswordIndexRoute
+  '/home-page-data': typeof protectedHomePageDataIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/(auth)': typeof authRouteRouteWithChildren
+  '/(protected)': typeof protectedRouteRouteWithChildren
   '/(home)/': typeof homeIndexRoute
   '/poll/': typeof PollIndexRoute
   '/(auth)/forgot-password/': typeof authForgotPasswordIndexRoute
   '/(auth)/login/': typeof authLoginIndexRoute
   '/(auth)/sign-up/': typeof authSignUpIndexRoute
   '/(auth)/update-password/': typeof authUpdatePasswordIndexRoute
+  '/(protected)/home-page-data/': typeof protectedHomePageDataIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -87,6 +103,7 @@ export interface FileRouteTypes {
     | '/login/'
     | '/sign-up/'
     | '/update-password/'
+    | '/home-page-data/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -95,25 +112,36 @@ export interface FileRouteTypes {
     | '/login'
     | '/sign-up'
     | '/update-password'
+    | '/home-page-data'
   id:
     | '__root__'
     | '/(auth)'
+    | '/(protected)'
     | '/(home)/'
     | '/poll/'
     | '/(auth)/forgot-password/'
     | '/(auth)/login/'
     | '/(auth)/sign-up/'
     | '/(auth)/update-password/'
+    | '/(protected)/home-page-data/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   authRouteRoute: typeof authRouteRouteWithChildren
+  protectedRouteRoute: typeof protectedRouteRouteWithChildren
   homeIndexRoute: typeof homeIndexRoute
   PollIndexRoute: typeof PollIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/(protected)': {
+      id: '/(protected)'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof protectedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/(auth)': {
       id: '/(auth)'
       path: ''
@@ -134,6 +162,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof homeIndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/(protected)/home-page-data/': {
+      id: '/(protected)/home-page-data/'
+      path: '/home-page-data'
+      fullPath: '/home-page-data/'
+      preLoaderRoute: typeof protectedHomePageDataIndexRouteImport
+      parentRoute: typeof protectedRouteRoute
     }
     '/(auth)/update-password/': {
       id: '/(auth)/update-password/'
@@ -184,8 +219,21 @@ const authRouteRouteWithChildren = authRouteRoute._addFileChildren(
   authRouteRouteChildren,
 )
 
+interface protectedRouteRouteChildren {
+  protectedHomePageDataIndexRoute: typeof protectedHomePageDataIndexRoute
+}
+
+const protectedRouteRouteChildren: protectedRouteRouteChildren = {
+  protectedHomePageDataIndexRoute: protectedHomePageDataIndexRoute,
+}
+
+const protectedRouteRouteWithChildren = protectedRouteRoute._addFileChildren(
+  protectedRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   authRouteRoute: authRouteRouteWithChildren,
+  protectedRouteRoute: protectedRouteRouteWithChildren,
   homeIndexRoute: homeIndexRoute,
   PollIndexRoute: PollIndexRoute,
 }

@@ -3,4 +3,6 @@ export const SIDEBAR_STRINGS = {
   subtitle: "קואופרטיב חיפאי",
   home: "דף הבית",
   poll: "סקר שם",
+  login: "התחבר",
+  logout: "התנתק",
 } as const

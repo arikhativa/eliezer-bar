@@ -12,13 +12,14 @@ import { Label } from "@workspace/ui/components/label"
 import { cn } from "@workspace/ui/lib/utils"
 import { supabase } from "@/lib/supabase/client"
 import { AUTH_STRING } from "@/lib/strings/auth"
-import { Link } from "@tanstack/react-router"
+import { Link, useNavigate } from "@tanstack/react-router"
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
   const [email, setEmail] = useState("")
+  const navigate = useNavigate()
   const [password, setPassword] = useState("")
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
@@ -34,7 +35,7 @@ export function LoginForm({
         password,
       })
       if (error) throw error
-      location.href = "/home"
+      navigate({ to: "/" })
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : "An error occurred")
     } finally {
@@ -80,7 +81,7 @@ export function LoginForm({
               </div>
               {error && <p className="text-sm text-red-500">{error}</p>}
               <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? "Logging in..." : "Login"}
+                {isLoading ? AUTH_STRING.loggingIn : AUTH_STRING.login}
               </Button>
             </div>
             <div className="mt-4 text-center text-sm">

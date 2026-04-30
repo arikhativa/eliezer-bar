@@ -1,11 +1,15 @@
+import { useLogout } from "@/hooks/useLogout"
 import { authQO } from "@/lib/queryOptions/auth"
 import { SIDEBAR_STRINGS } from "@/lib/strings/sidebar"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import {
+  Link,
   useNavigate,
   useRouterState,
   type FileRouteTypes,
 } from "@tanstack/react-router"
+import { Button } from "@workspace/ui/components/button"
+import { Separator } from "@workspace/ui/components/separator"
 import {
   Sidebar,
   SidebarContent,
@@ -30,6 +34,7 @@ interface SidebarItem {
 
 export function AppSidebar() {
   const router = useRouterState()
+  const logout = useLogout()
   const { data: user } = useSuspenseQuery(authQO())
   const navigate = useNavigate()
 
@@ -86,7 +91,16 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter />
+      <Separator></Separator>
+      <SidebarFooter className="pb-10">
+        {!!user ? (
+          <Button onClick={logout}>{SIDEBAR_STRINGS.logout}</Button>
+        ) : (
+          <Button asChild>
+            <Link to={"/login"}>{SIDEBAR_STRINGS.login}</Link>
+          </Button>
+        )}
+      </SidebarFooter>
     </Sidebar>
   )
 }
