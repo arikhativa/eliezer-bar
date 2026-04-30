@@ -9,12 +9,18 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as UpdatePasswordIndexRouteImport } from './routes/update-password/index'
 import { Route as SignUpIndexRouteImport } from './routes/sign-up/index'
 import { Route as PollIndexRouteImport } from './routes/poll/index'
 import { Route as LoginIndexRouteImport } from './routes/login/index'
 import { Route as ForgotPasswordIndexRouteImport } from './routes/forgot-password/index'
 import { Route as homeIndexRouteImport } from './routes/(home)/index'
 
+const UpdatePasswordIndexRoute = UpdatePasswordIndexRouteImport.update({
+  id: '/update-password/',
+  path: '/update-password/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SignUpIndexRoute = SignUpIndexRouteImport.update({
   id: '/sign-up/',
   path: '/sign-up/',
@@ -47,6 +53,7 @@ export interface FileRoutesByFullPath {
   '/login/': typeof LoginIndexRoute
   '/poll/': typeof PollIndexRoute
   '/sign-up/': typeof SignUpIndexRoute
+  '/update-password/': typeof UpdatePasswordIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof homeIndexRoute
@@ -54,6 +61,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginIndexRoute
   '/poll': typeof PollIndexRoute
   '/sign-up': typeof SignUpIndexRoute
+  '/update-password': typeof UpdatePasswordIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,12 +70,25 @@ export interface FileRoutesById {
   '/login/': typeof LoginIndexRoute
   '/poll/': typeof PollIndexRoute
   '/sign-up/': typeof SignUpIndexRoute
+  '/update-password/': typeof UpdatePasswordIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/forgot-password/' | '/login/' | '/poll/' | '/sign-up/'
+  fullPaths:
+    | '/'
+    | '/forgot-password/'
+    | '/login/'
+    | '/poll/'
+    | '/sign-up/'
+    | '/update-password/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/forgot-password' | '/login' | '/poll' | '/sign-up'
+  to:
+    | '/'
+    | '/forgot-password'
+    | '/login'
+    | '/poll'
+    | '/sign-up'
+    | '/update-password'
   id:
     | '__root__'
     | '/(home)/'
@@ -75,6 +96,7 @@ export interface FileRouteTypes {
     | '/login/'
     | '/poll/'
     | '/sign-up/'
+    | '/update-password/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -83,10 +105,18 @@ export interface RootRouteChildren {
   LoginIndexRoute: typeof LoginIndexRoute
   PollIndexRoute: typeof PollIndexRoute
   SignUpIndexRoute: typeof SignUpIndexRoute
+  UpdatePasswordIndexRoute: typeof UpdatePasswordIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/update-password/': {
+      id: '/update-password/'
+      path: '/update-password'
+      fullPath: '/update-password/'
+      preLoaderRoute: typeof UpdatePasswordIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sign-up/': {
       id: '/sign-up/'
       path: '/sign-up'
@@ -131,6 +161,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginIndexRoute: LoginIndexRoute,
   PollIndexRoute: PollIndexRoute,
   SignUpIndexRoute: SignUpIndexRoute,
+  UpdatePasswordIndexRoute: UpdatePasswordIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
