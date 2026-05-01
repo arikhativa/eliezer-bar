@@ -13,6 +13,7 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
+  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -33,38 +34,55 @@ import { isAdmin } from "@/lib/utils";
 
 interface SidebarItem {
   icon: LucideIcon;
-  reqAdmin?: boolean;
-  reqAuth: boolean;
   subItems?: SidebarItem[];
   title: string;
   to: FileRouteTypes["to"];
 }
 
-export function AppSidebar() {
+function NavElement({ e }: { e: SidebarItem }) {
   const router = useRouterState();
-  const logout = useLogout();
-  const { data: user } = useSuspenseQuery(authQO());
 
   const navigate = useNavigate();
+
+  return (
+    <SidebarMenuItem className="px-2 py-1">
+      <SidebarMenuButton
+        isActive={router.location.pathname === e.to}
+        onClick={() => {
+          navigate({
+            to: e.to,
+            from: "/",
+          });
+        }}
+      >
+        <e.icon />
+        <p className="test-base font-semibold">{e.title}</p>
+      </SidebarMenuButton>
+    </SidebarMenuItem>
+  );
+}
+
+export function AppSidebar() {
+  const logout = useLogout();
+  const { data: user } = useSuspenseQuery(authQO());
 
   const list: SidebarItem[] = [
     {
       title: SIDEBAR_STRINGS.home,
       to: "/",
-      reqAuth: false,
       icon: Home,
     },
     {
       title: SIDEBAR_STRINGS.poll,
       to: "/poll",
-      reqAuth: true,
       icon: ChartColumn,
     },
+  ];
+
+  const adminList: SidebarItem[] = [
     {
       title: SIDEBAR_STRINGS.hameData,
       to: "/home-page-data",
-      reqAuth: true,
-      reqAdmin: true,
       icon: DatabaseIcon,
     },
   ];
@@ -86,32 +104,34 @@ export function AppSidebar() {
             <SidebarMenu>
               {list.map((e) => (
                 <Fragment key={e.title}>
-                  <SidebarMenuItem className="px-2 py-1">
-                    <SidebarMenuButton
-                      disabled={e.reqAuth ? !user : false}
-                      hidden={e.reqAdmin ? !isAdmin(user) : false}
-                      isActive={router.location.pathname === e.to}
-                      onClick={() => {
-                        navigate({
-                          to: e.to,
-                          from: "/",
-                        });
-                      }}
-                    >
-                      <e.icon />
-                      <p className="test-base font-semibold">{e.title}</p>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
+                  <NavElement e={e} />
                 </Fragment>
               ))}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
+        {isAdmin(user) && (
+          <SidebarGroup>
+            <SidebarGroupLabel>{SIDEBAR_STRINGS.adminPage}</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {adminList.map((e) => (
+                  <Fragment key={e.title}>
+                    <NavElement e={e} />
+                  </Fragment>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        )}
       </SidebarContent>
       <Separator />
-      <SidebarFooter className="pb-10">
+      <SidebarFooter className="px-4 py-6">
         {user ? (
-          <Button onClick={logout}>{SIDEBAR_STRINGS.logout}</Button>
+          <>
+            <p className="text-center text-muted-foreground">{user.email}</p>
+            <Button onClick={logout}>{SIDEBAR_STRINGS.logout}</Button>
+          </>
         ) : (
           <Button asChild>
             <Link to={"/login"}>{SIDEBAR_STRINGS.login}</Link>
