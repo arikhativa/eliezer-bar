@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { Button } from "@workspace/ui/components/button";
 import {
   Card,
@@ -10,7 +11,10 @@ import { Input } from "@workspace/ui/components/input";
 import { Label } from "@workspace/ui/components/label";
 import { cn } from "@workspace/ui/lib/utils";
 import { useState } from "react";
+import { FORGOT_PASSWORD_STRING } from "@/lib/strings/auth";
 import { supabase } from "@/lib/supabase/client";
+
+const siteDomain = import.meta.env.VITE_SITE_DOMAIN;
 
 export function ForgotPasswordForm({
   className,
@@ -27,9 +31,8 @@ export function ForgotPasswordForm({
     setError(null);
 
     try {
-      // The url which will be included in the email. This URL needs to be configured in your redirect URLs in the Supabase dashboard at https://supabase.com/dashboard/project/_/auth/url-configuration
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: "http://localhost:3000/update-password",
+        redirectTo: `${siteDomain}/update-password`,
       });
       if (error) {
         throw error;
@@ -47,34 +50,38 @@ export function ForgotPasswordForm({
       {success ? (
         <Card>
           <CardHeader>
-            <CardTitle className="text-2xl">Check Your Email</CardTitle>
-            <CardDescription>Password reset instructions sent</CardDescription>
+            <CardTitle className="text-2xl">
+              {FORGOT_PASSWORD_STRING.checkEmail}
+            </CardTitle>
+            <CardDescription>
+              {FORGOT_PASSWORD_STRING.resetSent}
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <p className="text-muted-foreground text-sm">
-              If you registered using your email and password, you will receive
-              a password reset email.
+              {FORGOT_PASSWORD_STRING.resetMessage}
             </p>
           </CardContent>
         </Card>
       ) : (
         <Card>
           <CardHeader>
-            <CardTitle className="text-2xl">Reset Your Password</CardTitle>
+            <CardTitle className="text-2xl">
+              {FORGOT_PASSWORD_STRING.resetPassword}
+            </CardTitle>
             <CardDescription>
-              Type in your email and we&apos;ll send you a link to reset your
-              password
+              {FORGOT_PASSWORD_STRING.resetDescription}
             </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleForgotPassword}>
               <div className="flex flex-col gap-6">
                 <div className="grid gap-2">
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email">{FORGOT_PASSWORD_STRING.email}</Label>
                   <Input
                     id="email"
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="m@example.com"
+                    placeholder="email@example.com"
                     required
                     type="email"
                     value={email}
@@ -82,14 +89,16 @@ export function ForgotPasswordForm({
                 </div>
                 {error && <p className="text-red-500 text-sm">{error}</p>}
                 <Button className="w-full" disabled={isLoading} type="submit">
-                  {isLoading ? "Sending..." : "Send reset email"}
+                  {isLoading
+                    ? FORGOT_PASSWORD_STRING.sending
+                    : FORGOT_PASSWORD_STRING.sendReset}
                 </Button>
               </div>
               <div className="mt-4 text-center text-sm">
-                Already have an account?{" "}
-                <a className="underline underline-offset-4" href="/login">
-                  Login
-                </a>
+                {FORGOT_PASSWORD_STRING.alreadyHaveAccount}
+                <Button asChild variant={"link"}>
+                  <Link to={"/login"}>{FORGOT_PASSWORD_STRING.login}</Link>
+                </Button>
               </div>
             </form>
           </CardContent>

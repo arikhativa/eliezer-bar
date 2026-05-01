@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { Button } from "@workspace/ui/components/button";
 import {
   Card,
@@ -10,6 +11,7 @@ import { Input } from "@workspace/ui/components/input";
 import { Label } from "@workspace/ui/components/label";
 import { cn } from "@workspace/ui/lib/utils";
 import { useState } from "react";
+import { SIGNUP_STRING } from "@/lib/strings/auth";
 import { supabase } from "@/lib/supabase/client";
 
 export function SignUpForm({
@@ -23,12 +25,12 @@ export function SignUpForm({
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const handleSignUp = async (e: React.FormEvent) => {
+  const handleSignUp = async (e: React.SubmitEvent) => {
     e.preventDefault();
     setError(null);
 
     if (password !== repeatPassword) {
-      setError("Passwords do not match");
+      setError(SIGNUP_STRING.passwordsNoMatch);
       return;
     }
     setIsLoading(true);
@@ -54,33 +56,30 @@ export function SignUpForm({
       {success ? (
         <Card>
           <CardHeader>
-            <CardTitle className="text-2xl">
-              Thank you for signing up!
-            </CardTitle>
-            <CardDescription>Check your email to confirm</CardDescription>
+            <CardTitle className="text-2xl">{SIGNUP_STRING.thankYou}</CardTitle>
+            <CardDescription>{SIGNUP_STRING.checkEmail}</CardDescription>
           </CardHeader>
           <CardContent>
             <p className="text-muted-foreground text-sm">
-              You&apos;ve successfully signed up. Please check your email to
-              confirm your account before signing in.
+              {SIGNUP_STRING.confirmMessage}
             </p>
           </CardContent>
         </Card>
       ) : (
         <Card>
           <CardHeader>
-            <CardTitle className="text-2xl">Sign up</CardTitle>
-            <CardDescription>Create a new account</CardDescription>
+            <CardTitle className="text-2xl">{SIGNUP_STRING.signUp}</CardTitle>
+            <CardDescription>{SIGNUP_STRING.createAccount}</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSignUp}>
               <div className="flex flex-col gap-6">
                 <div className="grid gap-2">
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email">{SIGNUP_STRING.email}</Label>
                   <Input
                     id="email"
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="m@example.com"
+                    placeholder="email@example.com"
                     required
                     type="email"
                     value={email}
@@ -88,7 +87,7 @@ export function SignUpForm({
                 </div>
                 <div className="grid gap-2">
                   <div className="flex items-center">
-                    <Label htmlFor="password">Password</Label>
+                    <Label htmlFor="password">{SIGNUP_STRING.pass}</Label>
                   </div>
                   <Input
                     id="password"
@@ -100,7 +99,9 @@ export function SignUpForm({
                 </div>
                 <div className="grid gap-2">
                   <div className="flex items-center">
-                    <Label htmlFor="repeat-password">Repeat Password</Label>
+                    <Label htmlFor="repeat-password">
+                      {SIGNUP_STRING.repeatPass}
+                    </Label>
                   </div>
                   <Input
                     id="repeat-password"
@@ -112,14 +113,16 @@ export function SignUpForm({
                 </div>
                 {error && <p className="text-red-500 text-sm">{error}</p>}
                 <Button className="w-full" disabled={isLoading} type="submit">
-                  {isLoading ? "Creating an account..." : "Sign up"}
+                  {isLoading
+                    ? SIGNUP_STRING.creatingAccount
+                    : SIGNUP_STRING.signUp}
                 </Button>
               </div>
               <div className="mt-4 text-center text-sm">
-                Already have an account?{" "}
-                <a className="underline underline-offset-4" href="/login">
-                  Login
-                </a>
+                {SIGNUP_STRING.alreadyHaveAccount}
+                <Button asChild variant={"link"}>
+                  <Link to={"/login"}>{SIGNUP_STRING.login}</Link>
+                </Button>
               </div>
             </form>
           </CardContent>

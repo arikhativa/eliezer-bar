@@ -7,4 +7,5 @@ export const SIDEBAR_STRINGS = {
   login: "התחבר",
   logout: "התנתק",
   adminPage: "דפי אדמין",
+  signUp: "הרשם",
 } as const;

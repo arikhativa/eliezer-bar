@@ -1,9 +1,11 @@
 import { queryOptions } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase/client";
 
+export const AUTH_KEY = "user" as const;
+
 export function authQO() {
   return queryOptions({
-    queryKey: ["user"],
+    queryKey: [AUTH_KEY],
     queryFn: async () => {
       const {
         data: { session },

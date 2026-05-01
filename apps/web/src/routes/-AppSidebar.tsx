@@ -133,9 +133,14 @@ export function AppSidebar() {
             <Button onClick={logout}>{SIDEBAR_STRINGS.logout}</Button>
           </>
         ) : (
-          <Button asChild>
-            <Link to={"/login"}>{SIDEBAR_STRINGS.login}</Link>
-          </Button>
+          <>
+            <Button asChild>
+              <Link to={"/login"}>{SIDEBAR_STRINGS.login}</Link>
+            </Button>
+            <Button asChild variant={"link"}>
+              <Link to={"/sign-up"}>{SIDEBAR_STRINGS.signUp}</Link>
+            </Button>
+          </>
         )}
       </SidebarFooter>
     </Sidebar>
