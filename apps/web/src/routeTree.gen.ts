@@ -10,58 +10,66 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as protectedRouteRouteImport } from './routes/(protected)/route'
-import { Route as authRouteRouteImport } from './routes/(auth)/route'
-import { Route as PollIndexRouteImport } from './routes/poll/index'
-import { Route as homeIndexRouteImport } from './routes/(home)/index'
+import { Route as publicauthRouteRouteImport } from './routes/(public)/(auth)/route'
 import { Route as protectedadminRouteRouteImport } from './routes/(protected)/(admin)/route'
-import { Route as authUpdatePasswordIndexRouteImport } from './routes/(auth)/update-password/index'
-import { Route as authSignUpIndexRouteImport } from './routes/(auth)/sign-up/index'
-import { Route as authLoginIndexRouteImport } from './routes/(auth)/login/index'
-import { Route as authForgotPasswordIndexRouteImport } from './routes/(auth)/forgot-password/index'
+import { Route as publicWhoAreWeIndexRouteImport } from './routes/(public)/whoAreWe/index'
+import { Route as publicPollIndexRouteImport } from './routes/(public)/poll/index'
+import { Route as publichomeIndexRouteImport } from './routes/(public)/(home)/index'
+import { Route as publicauthUpdatePasswordIndexRouteImport } from './routes/(public)/(auth)/update-password/index'
+import { Route as publicauthSignUpIndexRouteImport } from './routes/(public)/(auth)/sign-up/index'
+import { Route as publicauthLoginIndexRouteImport } from './routes/(public)/(auth)/login/index'
+import { Route as publicauthForgotPasswordIndexRouteImport } from './routes/(public)/(auth)/forgot-password/index'
 import { Route as protectedadminHomePageDataIndexRouteImport } from './routes/(protected)/(admin)/home-page-data/index'
 
 const protectedRouteRoute = protectedRouteRouteImport.update({
   id: '/(protected)',
   getParentRoute: () => rootRouteImport,
 } as any)
-const authRouteRoute = authRouteRouteImport.update({
-  id: '/(auth)',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PollIndexRoute = PollIndexRouteImport.update({
-  id: '/poll/',
-  path: '/poll/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const homeIndexRoute = homeIndexRouteImport.update({
-  id: '/(home)/',
-  path: '/',
+const publicauthRouteRoute = publicauthRouteRouteImport.update({
+  id: '/(public)/(auth)',
   getParentRoute: () => rootRouteImport,
 } as any)
 const protectedadminRouteRoute = protectedadminRouteRouteImport.update({
   id: '/(admin)',
   getParentRoute: () => protectedRouteRoute,
 } as any)
-const authUpdatePasswordIndexRoute = authUpdatePasswordIndexRouteImport.update({
-  id: '/update-password/',
-  path: '/update-password/',
-  getParentRoute: () => authRouteRoute,
+const publicWhoAreWeIndexRoute = publicWhoAreWeIndexRouteImport.update({
+  id: '/(public)/whoAreWe/',
+  path: '/whoAreWe/',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const authSignUpIndexRoute = authSignUpIndexRouteImport.update({
+const publicPollIndexRoute = publicPollIndexRouteImport.update({
+  id: '/(public)/poll/',
+  path: '/poll/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const publichomeIndexRoute = publichomeIndexRouteImport.update({
+  id: '/(public)/(home)/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const publicauthUpdatePasswordIndexRoute =
+  publicauthUpdatePasswordIndexRouteImport.update({
+    id: '/update-password/',
+    path: '/update-password/',
+    getParentRoute: () => publicauthRouteRoute,
+  } as any)
+const publicauthSignUpIndexRoute = publicauthSignUpIndexRouteImport.update({
   id: '/sign-up/',
   path: '/sign-up/',
-  getParentRoute: () => authRouteRoute,
+  getParentRoute: () => publicauthRouteRoute,
 } as any)
-const authLoginIndexRoute = authLoginIndexRouteImport.update({
+const publicauthLoginIndexRoute = publicauthLoginIndexRouteImport.update({
   id: '/login/',
   path: '/login/',
-  getParentRoute: () => authRouteRoute,
+  getParentRoute: () => publicauthRouteRoute,
 } as any)
-const authForgotPasswordIndexRoute = authForgotPasswordIndexRouteImport.update({
-  id: '/forgot-password/',
-  path: '/forgot-password/',
-  getParentRoute: () => authRouteRoute,
-} as any)
+const publicauthForgotPasswordIndexRoute =
+  publicauthForgotPasswordIndexRouteImport.update({
+    id: '/forgot-password/',
+    path: '/forgot-password/',
+    getParentRoute: () => publicauthRouteRoute,
+  } as any)
 const protectedadminHomePageDataIndexRoute =
   protectedadminHomePageDataIndexRouteImport.update({
     id: '/home-page-data/',
@@ -70,74 +78,81 @@ const protectedadminHomePageDataIndexRoute =
   } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof homeIndexRoute
-  '/poll/': typeof PollIndexRoute
-  '/forgot-password/': typeof authForgotPasswordIndexRoute
-  '/login/': typeof authLoginIndexRoute
-  '/sign-up/': typeof authSignUpIndexRoute
-  '/update-password/': typeof authUpdatePasswordIndexRoute
+  '/': typeof publichomeIndexRoute
+  '/poll/': typeof publicPollIndexRoute
+  '/whoAreWe/': typeof publicWhoAreWeIndexRoute
   '/home-page-data/': typeof protectedadminHomePageDataIndexRoute
+  '/forgot-password/': typeof publicauthForgotPasswordIndexRoute
+  '/login/': typeof publicauthLoginIndexRoute
+  '/sign-up/': typeof publicauthSignUpIndexRoute
+  '/update-password/': typeof publicauthUpdatePasswordIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof homeIndexRoute
-  '/poll': typeof PollIndexRoute
-  '/forgot-password': typeof authForgotPasswordIndexRoute
-  '/login': typeof authLoginIndexRoute
-  '/sign-up': typeof authSignUpIndexRoute
-  '/update-password': typeof authUpdatePasswordIndexRoute
+  '/': typeof publichomeIndexRoute
+  '/poll': typeof publicPollIndexRoute
+  '/whoAreWe': typeof publicWhoAreWeIndexRoute
   '/home-page-data': typeof protectedadminHomePageDataIndexRoute
+  '/forgot-password': typeof publicauthForgotPasswordIndexRoute
+  '/login': typeof publicauthLoginIndexRoute
+  '/sign-up': typeof publicauthSignUpIndexRoute
+  '/update-password': typeof publicauthUpdatePasswordIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/(auth)': typeof authRouteRouteWithChildren
   '/(protected)': typeof protectedRouteRouteWithChildren
   '/(protected)/(admin)': typeof protectedadminRouteRouteWithChildren
-  '/(home)/': typeof homeIndexRoute
-  '/poll/': typeof PollIndexRoute
-  '/(auth)/forgot-password/': typeof authForgotPasswordIndexRoute
-  '/(auth)/login/': typeof authLoginIndexRoute
-  '/(auth)/sign-up/': typeof authSignUpIndexRoute
-  '/(auth)/update-password/': typeof authUpdatePasswordIndexRoute
+  '/(public)/(auth)': typeof publicauthRouteRouteWithChildren
+  '/(public)/(home)/': typeof publichomeIndexRoute
+  '/(public)/poll/': typeof publicPollIndexRoute
+  '/(public)/whoAreWe/': typeof publicWhoAreWeIndexRoute
   '/(protected)/(admin)/home-page-data/': typeof protectedadminHomePageDataIndexRoute
+  '/(public)/(auth)/forgot-password/': typeof publicauthForgotPasswordIndexRoute
+  '/(public)/(auth)/login/': typeof publicauthLoginIndexRoute
+  '/(public)/(auth)/sign-up/': typeof publicauthSignUpIndexRoute
+  '/(public)/(auth)/update-password/': typeof publicauthUpdatePasswordIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/poll/'
+    | '/whoAreWe/'
+    | '/home-page-data/'
     | '/forgot-password/'
     | '/login/'
     | '/sign-up/'
     | '/update-password/'
-    | '/home-page-data/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/poll'
+    | '/whoAreWe'
+    | '/home-page-data'
     | '/forgot-password'
     | '/login'
     | '/sign-up'
     | '/update-password'
-    | '/home-page-data'
   id:
     | '__root__'
-    | '/(auth)'
     | '/(protected)'
     | '/(protected)/(admin)'
-    | '/(home)/'
-    | '/poll/'
-    | '/(auth)/forgot-password/'
-    | '/(auth)/login/'
-    | '/(auth)/sign-up/'
-    | '/(auth)/update-password/'
+    | '/(public)/(auth)'
+    | '/(public)/(home)/'
+    | '/(public)/poll/'
+    | '/(public)/whoAreWe/'
     | '/(protected)/(admin)/home-page-data/'
+    | '/(public)/(auth)/forgot-password/'
+    | '/(public)/(auth)/login/'
+    | '/(public)/(auth)/sign-up/'
+    | '/(public)/(auth)/update-password/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  authRouteRoute: typeof authRouteRouteWithChildren
   protectedRouteRoute: typeof protectedRouteRouteWithChildren
-  homeIndexRoute: typeof homeIndexRoute
-  PollIndexRoute: typeof PollIndexRoute
+  publicauthRouteRoute: typeof publicauthRouteRouteWithChildren
+  publichomeIndexRoute: typeof publichomeIndexRoute
+  publicPollIndexRoute: typeof publicPollIndexRoute
+  publicWhoAreWeIndexRoute: typeof publicWhoAreWeIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -149,25 +164,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof protectedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/(auth)': {
-      id: '/(auth)'
+    '/(public)/(auth)': {
+      id: '/(public)/(auth)'
       path: ''
       fullPath: ''
-      preLoaderRoute: typeof authRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/poll/': {
-      id: '/poll/'
-      path: '/poll'
-      fullPath: '/poll/'
-      preLoaderRoute: typeof PollIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/(home)/': {
-      id: '/(home)/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof homeIndexRouteImport
+      preLoaderRoute: typeof publicauthRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/(protected)/(admin)': {
@@ -177,33 +178,54 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof protectedadminRouteRouteImport
       parentRoute: typeof protectedRouteRoute
     }
-    '/(auth)/update-password/': {
-      id: '/(auth)/update-password/'
+    '/(public)/whoAreWe/': {
+      id: '/(public)/whoAreWe/'
+      path: '/whoAreWe'
+      fullPath: '/whoAreWe/'
+      preLoaderRoute: typeof publicWhoAreWeIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(public)/poll/': {
+      id: '/(public)/poll/'
+      path: '/poll'
+      fullPath: '/poll/'
+      preLoaderRoute: typeof publicPollIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(public)/(home)/': {
+      id: '/(public)/(home)/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof publichomeIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(public)/(auth)/update-password/': {
+      id: '/(public)/(auth)/update-password/'
       path: '/update-password'
       fullPath: '/update-password/'
-      preLoaderRoute: typeof authUpdatePasswordIndexRouteImport
-      parentRoute: typeof authRouteRoute
+      preLoaderRoute: typeof publicauthUpdatePasswordIndexRouteImport
+      parentRoute: typeof publicauthRouteRoute
     }
-    '/(auth)/sign-up/': {
-      id: '/(auth)/sign-up/'
+    '/(public)/(auth)/sign-up/': {
+      id: '/(public)/(auth)/sign-up/'
       path: '/sign-up'
       fullPath: '/sign-up/'
-      preLoaderRoute: typeof authSignUpIndexRouteImport
-      parentRoute: typeof authRouteRoute
+      preLoaderRoute: typeof publicauthSignUpIndexRouteImport
+      parentRoute: typeof publicauthRouteRoute
     }
-    '/(auth)/login/': {
-      id: '/(auth)/login/'
+    '/(public)/(auth)/login/': {
+      id: '/(public)/(auth)/login/'
       path: '/login'
       fullPath: '/login/'
-      preLoaderRoute: typeof authLoginIndexRouteImport
-      parentRoute: typeof authRouteRoute
+      preLoaderRoute: typeof publicauthLoginIndexRouteImport
+      parentRoute: typeof publicauthRouteRoute
     }
-    '/(auth)/forgot-password/': {
-      id: '/(auth)/forgot-password/'
+    '/(public)/(auth)/forgot-password/': {
+      id: '/(public)/(auth)/forgot-password/'
       path: '/forgot-password'
       fullPath: '/forgot-password/'
-      preLoaderRoute: typeof authForgotPasswordIndexRouteImport
-      parentRoute: typeof authRouteRoute
+      preLoaderRoute: typeof publicauthForgotPasswordIndexRouteImport
+      parentRoute: typeof publicauthRouteRoute
     }
     '/(protected)/(admin)/home-page-data/': {
       id: '/(protected)/(admin)/home-page-data/'
@@ -214,24 +236,6 @@ declare module '@tanstack/react-router' {
     }
   }
 }
-
-interface authRouteRouteChildren {
-  authForgotPasswordIndexRoute: typeof authForgotPasswordIndexRoute
-  authLoginIndexRoute: typeof authLoginIndexRoute
-  authSignUpIndexRoute: typeof authSignUpIndexRoute
-  authUpdatePasswordIndexRoute: typeof authUpdatePasswordIndexRoute
-}
-
-const authRouteRouteChildren: authRouteRouteChildren = {
-  authForgotPasswordIndexRoute: authForgotPasswordIndexRoute,
-  authLoginIndexRoute: authLoginIndexRoute,
-  authSignUpIndexRoute: authSignUpIndexRoute,
-  authUpdatePasswordIndexRoute: authUpdatePasswordIndexRoute,
-}
-
-const authRouteRouteWithChildren = authRouteRoute._addFileChildren(
-  authRouteRouteChildren,
-)
 
 interface protectedadminRouteRouteChildren {
   protectedadminHomePageDataIndexRoute: typeof protectedadminHomePageDataIndexRoute
@@ -256,11 +260,30 @@ const protectedRouteRouteWithChildren = protectedRouteRoute._addFileChildren(
   protectedRouteRouteChildren,
 )
 
+interface publicauthRouteRouteChildren {
+  publicauthForgotPasswordIndexRoute: typeof publicauthForgotPasswordIndexRoute
+  publicauthLoginIndexRoute: typeof publicauthLoginIndexRoute
+  publicauthSignUpIndexRoute: typeof publicauthSignUpIndexRoute
+  publicauthUpdatePasswordIndexRoute: typeof publicauthUpdatePasswordIndexRoute
+}
+
+const publicauthRouteRouteChildren: publicauthRouteRouteChildren = {
+  publicauthForgotPasswordIndexRoute: publicauthForgotPasswordIndexRoute,
+  publicauthLoginIndexRoute: publicauthLoginIndexRoute,
+  publicauthSignUpIndexRoute: publicauthSignUpIndexRoute,
+  publicauthUpdatePasswordIndexRoute: publicauthUpdatePasswordIndexRoute,
+}
+
+const publicauthRouteRouteWithChildren = publicauthRouteRoute._addFileChildren(
+  publicauthRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
-  authRouteRoute: authRouteRouteWithChildren,
   protectedRouteRoute: protectedRouteRouteWithChildren,
-  homeIndexRoute: homeIndexRoute,
-  PollIndexRoute: PollIndexRoute,
+  publicauthRouteRoute: publicauthRouteRouteWithChildren,
+  publichomeIndexRoute: publichomeIndexRoute,
+  publicPollIndexRoute: publicPollIndexRoute,
+  publicWhoAreWeIndexRoute: publicWhoAreWeIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

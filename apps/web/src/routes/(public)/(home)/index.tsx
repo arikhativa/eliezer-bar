@@ -2,12 +2,12 @@ import { createFileRoute } from "@tanstack/react-router";
 import { TypographyH1 } from "@workspace/ui/components/TypographyH1";
 import { TypographyH2 } from "@workspace/ui/components/TypographyH2";
 import { HOME_STRING } from "@/lib/strings/home";
-import { DataCard } from "@/routes/(home)/-DataCard";
-import { EOISection } from "@/routes/(home)/-EOISection";
-import { MainIssueCard } from "@/routes/(home)/-MainIssueCard";
-import { SolutionSection } from "@/routes/(home)/-SolutionSection";
+import { DataCard } from "@/routes/(public)/(home)/-DataCard";
+import { EOISection } from "@/routes/(public)/(home)/-EOISection";
+import { MainIssueCard } from "@/routes/(public)/(home)/-MainIssueCard";
+import { SolutionSection } from "@/routes/(public)/(home)/-SolutionSection";
 
-export const Route = createFileRoute("/(home)/")({
+export const Route = createFileRoute("/(public)/(home)/")({
   component: HomeComponent,
 });
 

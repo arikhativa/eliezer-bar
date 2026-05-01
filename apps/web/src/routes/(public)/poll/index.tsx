@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/poll/")({
+export const Route = createFileRoute("/(public)/poll/")({
   component: RouteComponent,
 });
 

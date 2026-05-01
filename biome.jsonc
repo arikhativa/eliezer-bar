@@ -13,6 +13,9 @@
       "style": {
         "useConsistentTypeDefinitions": "off",
         "useFilenamingConvention": "off"
+      },
+      "correctness": {
+        "useImageSize": "off"
       }
     }
   }

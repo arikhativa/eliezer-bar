@@ -21,6 +21,7 @@ import {
 } from "@workspace/ui/components/sidebar";
 import {
   Beer,
+  Carrot,
   ChartColumn,
   DatabaseIcon,
   Home,
@@ -71,6 +72,11 @@ export function AppSidebar() {
       title: SIDEBAR_STRINGS.home,
       to: "/",
       icon: Home,
+    },
+    {
+      title: SIDEBAR_STRINGS.whoAreWe,
+      to: "/whoAreWe",
+      icon: Carrot,
     },
     {
       title: SIDEBAR_STRINGS.poll,
