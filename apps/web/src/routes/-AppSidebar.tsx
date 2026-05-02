@@ -104,6 +104,7 @@ export function AppSidebar() {
           </p>
         </div>
       </SidebarHeader>
+      <Separator />
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
@@ -132,7 +133,7 @@ export function AppSidebar() {
         )}
       </SidebarContent>
       <Separator />
-      <SidebarFooter className="px-4 py-6">
+      <SidebarFooter className="px-4 py-4">
         {user ? (
           <>
             <p className="text-center text-muted-foreground">{user.email}</p>
