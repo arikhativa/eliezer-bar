@@ -7,6 +7,7 @@ export function authQO() {
   return queryOptions({
     queryKey: [AUTH_KEY],
     queryFn: async () => {
+      console.log("AA")
       const {
         data: { session },
       } = await supabase.auth.getSession()

@@ -12,7 +12,7 @@ import { Input } from "@workspace/ui/components/input"
 import { Label } from "@workspace/ui/components/label"
 import { cn } from "@workspace/ui/lib/utils"
 import { useState } from "react"
-import { HOMEPAGE_KEY } from "@/lib/queryOptions/homepage"
+import { AUTH_KEY } from "@/lib/queryOptions/auth"
 import { AUTH_STRING } from "@/lib/strings/auth"
 import { supabase } from "@/lib/supabase/client"
 
@@ -41,7 +41,9 @@ export function LoginForm({
       if (error) {
         throw error
       }
-      queryClient.invalidateQueries({ queryKey: [HOMEPAGE_KEY] })
+      console.log("QQ invali")
+      queryClient.invalidateQueries({ queryKey: [AUTH_KEY] })
+      console.log("QQ invali2")
       navigate({ to: "/" })
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : "An error occurred")

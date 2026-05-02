@@ -11,6 +11,7 @@
   "javascript": {
     "formatter": { "semicolons": "asNeeded" }
   },
+
   "linter": {
     "rules": {
       "style": {
@@ -19,7 +20,10 @@
       },
       "correctness": {
         "useImageSize": "off",
-        "noUnusedImports": "error"
+        "noUnusedImports": {
+          "level": "error",
+          "fix": "none"
+        }
       }
     }
   }

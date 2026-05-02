@@ -5,6 +5,7 @@ import { HOME_STRING } from "@/lib/strings/home"
 import { CurrentEvent } from "@/routes/(public)/(home)/-CurrentEvent"
 import { DataCard } from "@/routes/(public)/(home)/-DataCard"
 import { EOISection } from "@/routes/(public)/(home)/-EOISection"
+import { FQADropdown } from "@/routes/(public)/(home)/-FQADropdown"
 import { MainIssueCard } from "@/routes/(public)/(home)/-MainIssueCard"
 import { SolutionSection } from "@/routes/(public)/(home)/-SolutionSection"
 
@@ -23,6 +24,7 @@ function HomeComponent() {
       <CurrentEvent />
       <DataCard />
       <MainIssueCard />
+      <FQADropdown />
       <SolutionSection />
     </div>
   )

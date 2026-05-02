@@ -12,7 +12,7 @@ import { Input } from "@workspace/ui/components/input"
 import { Label } from "@workspace/ui/components/label"
 import { cn } from "@workspace/ui/lib/utils"
 import { useState } from "react"
-import { HOMEPAGE_KEY } from "@/lib/queryOptions/homepage"
+import { AUTH_KEY } from "@/lib/queryOptions/auth"
 import { SIGNUP_STRING } from "@/lib/strings/auth"
 import { supabase } from "@/lib/supabase/client"
 
@@ -47,7 +47,7 @@ export function SignUpForm({
         throw error
       }
       setSuccess(true)
-      queryClient.invalidateQueries({ queryKey: [HOMEPAGE_KEY] })
+      queryClient.invalidateQueries({ queryKey: [AUTH_KEY] })
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : "An error occurred")
     } finally {

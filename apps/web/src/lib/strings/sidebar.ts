@@ -10,6 +10,7 @@ export const SIDEBAR_STRINGS = {
   giveLoan: "לתת הלוואה",
   buyShare: "קניית מניה",
   logout: "התנתק",
+  fqa: "שאלות נפוצות",
   adminPage: "דפי אדמין",
   signUp: "הרשם",
 } as const
