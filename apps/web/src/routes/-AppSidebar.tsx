@@ -23,7 +23,9 @@ import {
   Beer,
   Carrot,
   ChartColumn,
+  Coins,
   DatabaseIcon,
+  HandCoins,
   Home,
   type LucideIcon,
 } from "lucide-react"
@@ -40,7 +42,7 @@ interface SidebarItem {
   to: FileRouteTypes["to"]
 }
 
-function NavElement({ e }: { e: SidebarItem }) {
+function NavElement({ disabled, e }: { e: SidebarItem; disabled?: boolean }) {
   const router = useRouterState()
 
   const navigate = useNavigate()
@@ -48,6 +50,7 @@ function NavElement({ e }: { e: SidebarItem }) {
   return (
     <SidebarMenuItem className="px-2 py-1">
       <SidebarMenuButton
+        disabled={disabled}
         isActive={router.location.pathname === e.to}
         onClick={() => {
           navigate({
@@ -78,10 +81,23 @@ export function AppSidebar() {
       to: "/whoAreWe",
       icon: Carrot,
     },
+  ]
+
+  const comingSoon: SidebarItem[] = [
     {
       title: SIDEBAR_STRINGS.poll,
       to: "/poll",
       icon: ChartColumn,
+    },
+    {
+      title: SIDEBAR_STRINGS.buyShare,
+      to: "/buyShare",
+      icon: Coins,
+    },
+    {
+      title: SIDEBAR_STRINGS.giveLoan,
+      to: "/giveLoan",
+      icon: HandCoins,
     },
   ]
 
@@ -112,6 +128,18 @@ export function AppSidebar() {
               {list.map((e) => (
                 <Fragment key={e.title}>
                   <NavElement e={e} />
+                </Fragment>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        <SidebarGroup>
+          <SidebarGroupLabel>{SIDEBAR_STRINGS.comingSoon}</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {comingSoon.map((e) => (
+                <Fragment key={e.title}>
+                  <NavElement disabled e={e} />
                 </Fragment>
               ))}
             </SidebarMenu>

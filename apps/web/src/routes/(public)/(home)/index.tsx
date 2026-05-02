@@ -19,11 +19,11 @@ function HomeComponent() {
         <TypographyH1>{HOME_STRING.title}</TypographyH1>
         <TypographyH2>{HOME_STRING.subtitle}</TypographyH2>
       </div>
+      <EOISection />
       <CurrentEvent />
       <DataCard />
       <MainIssueCard />
       <SolutionSection />
-      <EOISection />
     </div>
   )
 }

@@ -28,6 +28,7 @@ export function MainIssueCard() {
             <p className="text-center text-lg">
               {HOME_STRING.issueCard.quoteName}
             </p>
+            <Quote className="absolute bottom-0 left-0" />
           </ItemContent>
         </Item>
       </CardContent>

@@ -2,15 +2,15 @@ export const HOME_STRING = {
   title: "בר שכונתי קריית אליעזר",
   subtitle: "ביחד נקים מרחב משותף לשכונה שלנו",
   eoi: {
-    title: "רוצים להצטרף?",
-    subtitle: "תרשמו בטופס הזה",
+    title: "הצטרף אלינו עכשיו!",
+    subtitle: "טופס הצהרת כוונות",
     whatsapp: "הישארו מעודכנים",
   },
   card: {
     title: "התקדמות הגיוס",
     subtitle: "בדרך ליעד שלנו",
     items: {
-      stock: {
+      share: {
         title: "סה״כ מניות",
       },
       loan: {

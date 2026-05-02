@@ -1,30 +1,33 @@
 import { Button } from "@workspace/ui/components/button"
+import { Card, CardContent } from "@workspace/ui/components/card"
 import { TypographyH2 } from "@workspace/ui/components/TypographyH2"
 import { ExternalLink } from "@/components/ExternalLink"
 import { HOME_STRING } from "@/lib/strings/home"
 
 export function EOISection() {
   return (
-    <div className="flex flex-col items-center justify-center">
-      <TypographyH2>{HOME_STRING.eoi.title}</TypographyH2>
-      <p className="text-lg">
-        {HOME_STRING.eoi.subtitle}
+    <Card>
+      <CardContent className="flex flex-col items-center justify-center">
+        <TypographyH2>{HOME_STRING.eoi.title}</TypographyH2>
+        <p className="text-lg">
+          {HOME_STRING.eoi.subtitle}
 
-        <Button variant={"link"}>
-          <ExternalLink href="https://docs.google.com/forms/d/e/1FAIpQLSdAaqJjM-DxnFaqK6_wGIra06X9uuzHScviKLxjl-V-us2dBw/viewform">
-            Google Form
-          </ExternalLink>
-        </Button>
-      </p>
-      <p className="text-lg">
-        {HOME_STRING.eoi.whatsapp}
+          <Button variant={"link"}>
+            <ExternalLink href="https://docs.google.com/forms/d/e/1FAIpQLSdAaqJjM-DxnFaqK6_wGIra06X9uuzHScviKLxjl-V-us2dBw/viewform">
+              Google Form
+            </ExternalLink>
+          </Button>
+        </p>
+        <p className="text-lg">
+          {HOME_STRING.eoi.whatsapp}
 
-        <Button variant={"link"}>
-          <ExternalLink href="https://chat.whatsapp.com/G7dc7aC3qrH8iJ9knyGmD7">
-            Whatsapp Group
-          </ExternalLink>
-        </Button>
-      </p>
-    </div>
+          <Button variant={"link"}>
+            <ExternalLink href="https://chat.whatsapp.com/G7dc7aC3qrH8iJ9knyGmD7">
+              Whatsapp Group
+            </ExternalLink>
+          </Button>
+        </p>
+      </CardContent>
+    </Card>
   )
 }

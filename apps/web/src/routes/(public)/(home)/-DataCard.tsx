@@ -29,8 +29,8 @@ function IntoItem({ text, value }: { text: string; value: string | number }) {
 export function DataCard() {
   const { data } = useSuspenseQuery(homepageQO())
 
-  const stockSum = data.memberCount * STOCK_PRICE
-  const currentFunds = stockSum + data.loanSum
+  const shareSum = data.memberCount * STOCK_PRICE
+  const currentFunds = shareSum + data.loanSum
   const currentFundsPercent = (currentFunds / GOAL) * 100
 
   return (
@@ -63,8 +63,8 @@ export function DataCard() {
           value={data?.memberCount}
         />
         <IntoItem
-          text={HOME_STRING.card.items.stock.title}
-          value={`₪${stockSum.toLocaleString()}`}
+          text={HOME_STRING.card.items.share.title}
+          value={`₪${shareSum.toLocaleString()}`}
         />
       </CardFooter>
     </Card>
