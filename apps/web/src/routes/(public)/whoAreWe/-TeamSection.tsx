@@ -1,22 +1,27 @@
 import { Card, CardContent, CardHeader } from "@workspace/ui/components/card";
+import female from "@/assets/female.svg";
+import male from "@/assets/male.svg";
 
 interface PersonProps {
   age?: number;
   fullName: string;
+  isMale?: boolean;
   pic?: string;
 }
 
-function Pearson({ fullName, age, pic }: PersonProps) {
+function Pearson({ isMale, fullName, age, pic }: PersonProps) {
   return (
     <Card className="w-46">
-      <CardHeader>
-        <div className="aspect-square w-36 rounded-full">
+      <CardHeader className="flex items-center justify-center">
+        <div className="aspect-square w-26 rounded-full border-2 border-background bg-accent">
           {pic ? (
             <img alt={fullName} className="object-contain" src={pic} />
           ) : (
-            <div className="flex aspect-square w-full items-center justify-center rounded-full bg-background">
-              <p className="text-center">...</p>
-            </div>
+            <img
+              alt={fullName}
+              className="object-contain p-4 opacity-50"
+              src={isMale ? male : female}
+            />
           )}
         </div>
       </CardHeader>

@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { TypographyH1 } from "@workspace/ui/components/TypographyH1";
 import { TypographyH2 } from "@workspace/ui/components/TypographyH2";
 import {
+  SUPPORTS_FROM_CITY,
   TEAM_BIZ_DEV,
   TEAM_MANAGEMENT,
   TEAM_REAL_ESTATE,
@@ -26,6 +27,7 @@ function RouteComponent() {
       <TeamSection {...TEAM_REAL_ESTATE} />
       <TeamSection {...TEAM_SOCIAL} />
       <TeamSection {...TEAM_BIZ_DEV} />
+      <TeamSection {...SUPPORTS_FROM_CITY} />
     </div>
   );
 }

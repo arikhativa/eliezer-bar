@@ -11,25 +11,31 @@ export const TEAM_MANAGEMENT: TeamProps = {
   teamName: "וועד מנהל זמני",
   list: [
     {
+      isMale: true,
       fullName: "אריאל מניקוב",
     },
     {
       fullName: "יהודית מניקוב",
     },
     {
+      isMale: true,
       fullName: "בן",
     },
     {
+      isMale: true,
       fullName: "ליאור",
     },
     {
+      isMale: true,
       fullName: "איתמר",
     },
     {
+      isMale: true,
       fullName: "אלי שולמן",
     },
     {
       fullName: "יואב רבי",
+      isMale: true,
       age: 32,
     },
   ],
@@ -64,12 +70,15 @@ export const TEAM_SOCIAL: TeamProps = {
   teamName: "צוות סושיאל",
   list: [
     {
+      isMale: true,
       fullName: "תומר",
     },
     {
+      isMale: true,
       fullName: "זיו",
     },
     {
+      isMale: true,
       fullName: "שחר",
     },
   ],
@@ -79,7 +88,21 @@ export const TEAM_BIZ_DEV: TeamProps = {
   teamName: "צוות פיתוח עסקי",
   list: [
     {
+      isMale: true,
       fullName: "אייל",
+    },
+  ],
+};
+
+export const SUPPORTS_FROM_CITY: TeamProps = {
+  teamName: "עזרה מטעם העירייה",
+  list: [
+    {
+      isMale: true,
+      fullName: "עומרי",
+    },
+    {
+      fullName: "טל",
     },
   ],
 };
