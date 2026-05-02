@@ -28,7 +28,7 @@ export function FQADropdown() {
                 <p className="text-lg">{item.trigger}</p>
               </AccordionTrigger>
               <AccordionContent>
-                <div className="whitespace-pre-line text-lg text-slate-300 leading-relaxed">
+                <div className="whitespace-pre-line text-base text-slate-300 leading-relaxed">
                   {item.content}
                 </div>
               </AccordionContent>
