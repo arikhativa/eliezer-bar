@@ -18,7 +18,8 @@
         "useFilenamingConvention": "off"
       },
       "correctness": {
-        "useImageSize": "off"
+        "useImageSize": "off",
+        "noUnusedImports": "error"
       }
     }
   }

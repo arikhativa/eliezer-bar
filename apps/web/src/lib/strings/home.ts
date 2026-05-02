@@ -24,6 +24,9 @@ export const HOME_STRING = {
       },
     },
   },
+  currentEvent: {
+    title: "אירועים קרובים",
+  },
   issueCard: {
     title: "לא עוד חושך בשדרה",
     subtitle: "בואו להקים איתנו בר שכונתי שיאיר לנו!",
