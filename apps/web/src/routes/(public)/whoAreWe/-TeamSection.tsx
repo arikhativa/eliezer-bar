@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader } from "@workspace/ui/components/card"
+import { Item, ItemContent } from "@workspace/ui/components/item"
 import female from "@/assets/female.svg"
 import male from "@/assets/male.svg"
 
@@ -11,9 +11,9 @@ interface PersonProps {
 
 function Pearson({ isMale, fullName, age, pic }: PersonProps) {
   return (
-    <Card className="w-46">
-      <CardHeader className="flex items-center justify-center">
-        <div className="aspect-square w-26 rounded-full border-2 border-background bg-accent">
+    <Item className="w-46 bg-background">
+      <ItemContent className="flex items-center justify-center">
+        <div className="aspect-square w-26 rounded-full border-2 bg-accent">
           {pic ? (
             <img alt={fullName} className="object-contain" src={pic} />
           ) : (
@@ -24,11 +24,9 @@ function Pearson({ isMale, fullName, age, pic }: PersonProps) {
             />
           )}
         </div>
-      </CardHeader>
-      <CardContent>
         {age ? <p>{`${fullName}, ${age}`}</p> : <p>{fullName}</p>}
-      </CardContent>
-    </Card>
+      </ItemContent>
+    </Item>
   )
 }
 
@@ -40,7 +38,7 @@ export interface TeamProps {
 export function TeamSection({ teamName, list }: TeamProps) {
   return (
     <div className="flex w-full max-w-4xl flex-col gap-4">
-      <p className="text-2xl">{teamName}</p>
+      <p className="font-bold text-xl">{teamName}</p>
       <div className="flex flex-wrap gap-4">
         {list.map((e) => (
           <Pearson key={e.fullName} {...e} />

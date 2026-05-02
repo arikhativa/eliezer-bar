@@ -9,6 +9,7 @@ import { TypographyH2 } from "@workspace/ui/components/TypographyH2"
 import { Quote } from "lucide-react"
 import { HOME_STRING } from "@/lib/strings/home"
 
+// TODO not in use
 export function MainIssueCard() {
   return (
     <Card className="w-full max-w-3xl">
