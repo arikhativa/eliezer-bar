@@ -15,10 +15,9 @@ import { GENERAL_STRINGS } from "@/lib/strings/general"
 import { supabase } from "@/lib/supabase/client"
 
 const formSchema = z.object({
-  memberCount: z
-    .number()
-    .min(0, "Member count cannot be negative")
-    .max(1000, "Member count too large"),
+  memberCount: z.number().min(0).max(1000),
+  investorCount: z.number().min(0).max(1000),
+  loanSum: z.number().min(0).max(200_000),
 })
 
 type FormSchema = z.infer<typeof formSchema>
@@ -29,10 +28,7 @@ export function HomePageDataForm() {
 
   const mutation = useMutation({
     mutationFn: async (values: FormSchema) => {
-      await supabase
-        .from("homepage")
-        .update({ memberCount: values.memberCount })
-        .eq("id", 1)
+      await supabase.from("homepage").update(values).eq("id", 1)
 
       return values
     },
@@ -48,6 +44,8 @@ export function HomePageDataForm() {
   const form = useForm({
     defaultValues: {
       memberCount: data.memberCount,
+      investorCount: data.investorCount,
+      loanSum: data.loanSum,
     },
     validators: {
       onSubmit: formSchema,
@@ -64,6 +62,56 @@ export function HomePageDataForm() {
       }}
     >
       <form.Field name="memberCount">
+        {(field) => {
+          const isInvalid =
+            field.state.meta.isTouched && !field.state.meta.isValid
+          return (
+            <Field data-invalid={isInvalid}>
+              <FieldLabel htmlFor={field.name}>
+                {DATA_FORM_STRING[field.name]}
+              </FieldLabel>
+              <Input
+                aria-invalid={isInvalid}
+                id={field.name}
+                name={field.name}
+                onBlur={field.handleBlur}
+                onChange={(e) => field.handleChange(Number(e.target.value))}
+                placeholder="0"
+                type="number"
+                value={field.state.value}
+              />
+              {isInvalid && <FieldError errors={field.state.meta.errors} />}
+            </Field>
+          )
+        }}
+      </form.Field>
+
+      <form.Field name="investorCount">
+        {(field) => {
+          const isInvalid =
+            field.state.meta.isTouched && !field.state.meta.isValid
+          return (
+            <Field data-invalid={isInvalid}>
+              <FieldLabel htmlFor={field.name}>
+                {DATA_FORM_STRING[field.name]}
+              </FieldLabel>
+              <Input
+                aria-invalid={isInvalid}
+                id={field.name}
+                name={field.name}
+                onBlur={field.handleBlur}
+                onChange={(e) => field.handleChange(Number(e.target.value))}
+                placeholder="0"
+                type="number"
+                value={field.state.value}
+              />
+              {isInvalid && <FieldError errors={field.state.meta.errors} />}
+            </Field>
+          )
+        }}
+      </form.Field>
+
+      <form.Field name="loanSum">
         {(field) => {
           const isInvalid =
             field.state.meta.isTouched && !field.state.meta.isValid
