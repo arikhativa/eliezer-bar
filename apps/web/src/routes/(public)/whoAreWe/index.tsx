@@ -1,6 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { TypographyH1 } from "@workspace/ui/components/TypographyH1";
-import { TypographyH2 } from "@workspace/ui/components/TypographyH2";
+import { createFileRoute } from "@tanstack/react-router"
+import { TypographyH1 } from "@workspace/ui/components/TypographyH1"
+import { TypographyH2 } from "@workspace/ui/components/TypographyH2"
 import {
   SUPPORTS_FROM_CITY,
   TEAM_BIZ_DEV,
@@ -8,12 +8,12 @@ import {
   TEAM_REAL_ESTATE,
   TEAM_SOCIAL,
   WHO_ARE_WE_STRINGS,
-} from "@/lib/strings/whoAreWe";
-import { TeamSection } from "@/routes/(public)/whoAreWe/-TeamSection";
+} from "@/lib/strings/whoAreWe"
+import { TeamSection } from "@/routes/(public)/whoAreWe/-TeamSection"
 
 export const Route = createFileRoute("/(public)/whoAreWe/")({
   component: RouteComponent,
-});
+})
 
 function RouteComponent() {
   return (
@@ -29,5 +29,5 @@ function RouteComponent() {
       <TeamSection {...TEAM_BIZ_DEV} />
       <TeamSection {...SUPPORTS_FROM_CITY} />
     </div>
-  );
+  )
 }

@@ -1,54 +1,54 @@
-import { useQueryClient } from "@tanstack/react-query";
-import { Link, useNavigate } from "@tanstack/react-router";
-import { Button } from "@workspace/ui/components/button";
+import { useQueryClient } from "@tanstack/react-query"
+import { Link, useNavigate } from "@tanstack/react-router"
+import { Button } from "@workspace/ui/components/button"
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@workspace/ui/components/card";
-import { Input } from "@workspace/ui/components/input";
-import { Label } from "@workspace/ui/components/label";
-import { cn } from "@workspace/ui/lib/utils";
-import { useState } from "react";
-import { HOMEPAGE_KEY } from "@/lib/queryOptions/homepage";
-import { AUTH_STRING } from "@/lib/strings/auth";
-import { supabase } from "@/lib/supabase/client";
+} from "@workspace/ui/components/card"
+import { Input } from "@workspace/ui/components/input"
+import { Label } from "@workspace/ui/components/label"
+import { cn } from "@workspace/ui/lib/utils"
+import { useState } from "react"
+import { HOMEPAGE_KEY } from "@/lib/queryOptions/homepage"
+import { AUTH_STRING } from "@/lib/strings/auth"
+import { supabase } from "@/lib/supabase/client"
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
-  const [email, setEmail] = useState("");
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("")
+  const navigate = useNavigate()
+  const queryClient = useQueryClient()
+  const [password, setPassword] = useState("")
 
-  const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleLogin = async (e: React.SubmitEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError(null);
+    e.preventDefault()
+    setIsLoading(true)
+    setError(null)
 
     try {
       const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
-      });
+      })
       if (error) {
-        throw error;
+        throw error
       }
-      queryClient.invalidateQueries({ queryKey: [HOMEPAGE_KEY] });
-      navigate({ to: "/" });
+      queryClient.invalidateQueries({ queryKey: [HOMEPAGE_KEY] })
+      navigate({ to: "/" })
     } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : "An error occurred");
+      setError(error instanceof Error ? error.message : "An error occurred")
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -101,5 +101,5 @@ export function LoginForm({
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }

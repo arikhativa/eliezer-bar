@@ -1,10 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Card, CardContent } from "@workspace/ui/components/card";
-import { HomePageDataForm } from "@/routes/(protected)/(admin)/home-page-data/-HomePageDataForm";
+import { createFileRoute } from "@tanstack/react-router"
+import { Card, CardContent } from "@workspace/ui/components/card"
+import { HomePageDataForm } from "@/routes/(protected)/(admin)/home-page-data/-HomePageDataForm"
 
 export const Route = createFileRoute("/(protected)/(admin)/home-page-data/")({
   component: RouteComponent,
-});
+})
 
 function RouteComponent() {
   return (
@@ -15,5 +15,5 @@ function RouteComponent() {
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }

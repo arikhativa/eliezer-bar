@@ -1,15 +1,15 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { TypographyH1 } from "@workspace/ui/components/TypographyH1";
-import { TypographyH2 } from "@workspace/ui/components/TypographyH2";
-import { HOME_STRING } from "@/lib/strings/home";
-import { DataCard } from "@/routes/(public)/(home)/-DataCard";
-import { EOISection } from "@/routes/(public)/(home)/-EOISection";
-import { MainIssueCard } from "@/routes/(public)/(home)/-MainIssueCard";
-import { SolutionSection } from "@/routes/(public)/(home)/-SolutionSection";
+import { createFileRoute } from "@tanstack/react-router"
+import { TypographyH1 } from "@workspace/ui/components/TypographyH1"
+import { TypographyH2 } from "@workspace/ui/components/TypographyH2"
+import { HOME_STRING } from "@/lib/strings/home"
+import { DataCard } from "@/routes/(public)/(home)/-DataCard"
+import { EOISection } from "@/routes/(public)/(home)/-EOISection"
+import { MainIssueCard } from "@/routes/(public)/(home)/-MainIssueCard"
+import { SolutionSection } from "@/routes/(public)/(home)/-SolutionSection"
 
 export const Route = createFileRoute("/(public)/(home)/")({
   component: HomeComponent,
-});
+})
 
 function HomeComponent() {
   return (
@@ -18,10 +18,11 @@ function HomeComponent() {
         <TypographyH1>{HOME_STRING.title}</TypographyH1>
         <TypographyH2>{HOME_STRING.subtitle}</TypographyH2>
       </div>
+
       <DataCard />
       <MainIssueCard />
       <SolutionSection />
       <EOISection />
     </div>
-  );
+  )
 }

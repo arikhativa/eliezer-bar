@@ -1,16 +1,16 @@
-import { Card, CardContent } from "@workspace/ui/components/card";
-import { TypographyH2 } from "@workspace/ui/components/TypographyH2";
-import { Heart, type LucideIcon, Store, TrendingUp, Users } from "lucide-react";
-import { HOME_STRING } from "@/lib/strings/home";
+import { Card, CardContent } from "@workspace/ui/components/card"
+import { TypographyH2 } from "@workspace/ui/components/TypographyH2"
+import { Heart, type LucideIcon, Store, TrendingUp, Users } from "lucide-react"
+import { HOME_STRING } from "@/lib/strings/home"
 
 function IntoItem({
   title,
   subtitle,
   icon: Icon,
 }: {
-  title: string;
-  subtitle: string;
-  icon: LucideIcon;
+  title: string
+  subtitle: string
+  icon: LucideIcon
 }) {
   return (
     <Card className="flex-1">
@@ -22,7 +22,7 @@ function IntoItem({
         <p className="text-center text-muted-foreground">{subtitle}</p>
       </CardContent>
     </Card>
-  );
+  )
 }
 
 export function SolutionSection() {
@@ -36,5 +36,5 @@ export function SolutionSection() {
         <IntoItem icon={Heart} {...HOME_STRING.solution.effect} />
       </div>
     </div>
-  );
+  )
 }

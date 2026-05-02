@@ -3,11 +3,11 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
-} from "@workspace/ui/components/card";
-import { Item, ItemContent, ItemTitle } from "@workspace/ui/components/item";
-import { TypographyH2 } from "@workspace/ui/components/TypographyH2";
-import { Quote } from "lucide-react";
-import { HOME_STRING } from "@/lib/strings/home";
+} from "@workspace/ui/components/card"
+import { Item, ItemContent, ItemTitle } from "@workspace/ui/components/item"
+import { TypographyH2 } from "@workspace/ui/components/TypographyH2"
+import { Quote } from "lucide-react"
+import { HOME_STRING } from "@/lib/strings/home"
 
 export function MainIssueCard() {
   return (
@@ -32,5 +32,5 @@ export function MainIssueCard() {
         </Item>
       </CardContent>
     </Card>
-  );
+  )
 }

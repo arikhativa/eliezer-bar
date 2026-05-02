@@ -1,4 +1,4 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query"
 import {
   Card,
   CardContent,
@@ -6,14 +6,14 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@workspace/ui/components/card";
-import { Item, ItemContent, ItemTitle } from "@workspace/ui/components/item";
-import { Progress } from "@workspace/ui/components/progress";
-import { homepageQO } from "@/lib/queryOptions/homepage";
-import { HOME_STRING } from "@/lib/strings/home";
+} from "@workspace/ui/components/card"
+import { Item, ItemContent, ItemTitle } from "@workspace/ui/components/item"
+import { Progress } from "@workspace/ui/components/progress"
+import { homepageQO } from "@/lib/queryOptions/homepage"
+import { HOME_STRING } from "@/lib/strings/home"
 
-const STOCK_PRICE = 500 as const;
-const GOAL = 200_000 as const;
+const STOCK_PRICE = 500 as const
+const GOAL = 200_000 as const
 
 function IntoItem({ text, value }: { text: string; value: string | number }) {
   return (
@@ -23,15 +23,15 @@ function IntoItem({ text, value }: { text: string; value: string | number }) {
         <p className="text-2xl">{value}</p>
       </ItemContent>
     </Item>
-  );
+  )
 }
 
 export function DataCard() {
-  const { data } = useSuspenseQuery(homepageQO());
+  const { data } = useSuspenseQuery(homepageQO())
 
-  const stockSum = data.memberCount * STOCK_PRICE;
-  const currentFunds = stockSum + data.loanSum;
-  const currentFundsPercent = (currentFunds / GOAL) * 100;
+  const stockSum = data.memberCount * STOCK_PRICE
+  const currentFunds = stockSum + data.loanSum
+  const currentFundsPercent = (currentFunds / GOAL) * 100
 
   return (
     <Card className="w-full max-w-3xl">
@@ -68,5 +68,5 @@ export function DataCard() {
         />
       </CardFooter>
     </Card>
-  );
+  )
 }

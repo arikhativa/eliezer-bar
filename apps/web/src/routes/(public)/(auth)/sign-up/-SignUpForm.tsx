@@ -1,59 +1,59 @@
-import { useQueryClient } from "@tanstack/react-query";
-import { Link } from "@tanstack/react-router";
-import { Button } from "@workspace/ui/components/button";
+import { useQueryClient } from "@tanstack/react-query"
+import { Link } from "@tanstack/react-router"
+import { Button } from "@workspace/ui/components/button"
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@workspace/ui/components/card";
-import { Input } from "@workspace/ui/components/input";
-import { Label } from "@workspace/ui/components/label";
-import { cn } from "@workspace/ui/lib/utils";
-import { useState } from "react";
-import { HOMEPAGE_KEY } from "@/lib/queryOptions/homepage";
-import { SIGNUP_STRING } from "@/lib/strings/auth";
-import { supabase } from "@/lib/supabase/client";
+} from "@workspace/ui/components/card"
+import { Input } from "@workspace/ui/components/input"
+import { Label } from "@workspace/ui/components/label"
+import { cn } from "@workspace/ui/lib/utils"
+import { useState } from "react"
+import { HOMEPAGE_KEY } from "@/lib/queryOptions/homepage"
+import { SIGNUP_STRING } from "@/lib/strings/auth"
+import { supabase } from "@/lib/supabase/client"
 
 export function SignUpForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [repeatPassword, setRepeatPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const queryClient = useQueryClient();
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [repeatPassword, setRepeatPassword] = useState("")
+  const [error, setError] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const [success, setSuccess] = useState(false)
+  const queryClient = useQueryClient()
 
   const handleSignUp = async (e: React.SubmitEvent) => {
-    e.preventDefault();
-    setError(null);
+    e.preventDefault()
+    setError(null)
 
     if (password !== repeatPassword) {
-      setError(SIGNUP_STRING.passwordsNoMatch);
-      return;
+      setError(SIGNUP_STRING.passwordsNoMatch)
+      return
     }
-    setIsLoading(true);
+    setIsLoading(true)
 
     try {
       const { error } = await supabase.auth.signUp({
         email,
         password,
-      });
+      })
       if (error) {
-        throw error;
+        throw error
       }
-      setSuccess(true);
-      queryClient.invalidateQueries({ queryKey: [HOMEPAGE_KEY] });
+      setSuccess(true)
+      queryClient.invalidateQueries({ queryKey: [HOMEPAGE_KEY] })
     } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : "An error occurred");
+      setError(error instanceof Error ? error.message : "An error occurred")
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -133,5 +133,5 @@ export function SignUpForm({
         </Card>
       )}
     </div>
-  );
+  )
 }

@@ -7,7 +7,7 @@ export const AUTH_STRING = {
   noAccount: "אין לך חשבון?",
   signUp: "צור חשבון חדש",
   loggingIn: "מתחבר...",
-} as const;
+} as const
 
 export const SIGNUP_STRING = {
   signUp: "הרשמה",
@@ -23,7 +23,7 @@ export const SIGNUP_STRING = {
   confirmMessage:
     "התחברת בהצלחה. בדוק את המייל שלך כדי לאשר את החשבון שלך לפני התחברות.",
   passwordsNoMatch: "הסיסמאות לא תואמות",
-} as const;
+} as const
 
 export const FORGOT_PASSWORD_STRING = {
   checkEmail: "בדוק את המייל שלך",
@@ -36,7 +36,7 @@ export const FORGOT_PASSWORD_STRING = {
   sendReset: "שלח מייל לאיפוס סיסמה",
   alreadyHaveAccount: "כבר יש לך חשבון?",
   login: "התחברות",
-} as const;
+} as const
 
 export const UPDATE_PASSWORD_STRING = {
   resetPassword: "אפס את הסיסמה שלך",
@@ -44,4 +44,4 @@ export const UPDATE_PASSWORD_STRING = {
   newPassword: "סיסמה חדשה",
   saving: "שומר...",
   saveNewPassword: "שמור סיסמה חדשה",
-} as const;
+} as const

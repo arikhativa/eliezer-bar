@@ -1,11 +1,11 @@
-import type { TeamProps } from "@/routes/(public)/whoAreWe/-TeamSection";
+import type { TeamProps } from "@/routes/(public)/whoAreWe/-TeamSection"
 
 export const WHO_ARE_WE_STRINGS = {
   title: "הכירו אותנו",
   subtitle: "אנחנו תושבים מהשכונה שהתחברו יחד כדי להקים מקום מפגש בשבילנו",
   details:
     "התחלקנו לארבע צוותים במטרה להקים קואופרטיב (אגודה שיתופית) בתמיכה של עיריית חיפה",
-} as const;
+} as const
 
 export const TEAM_MANAGEMENT: TeamProps = {
   teamName: "וועד מנהל זמני",
@@ -39,7 +39,7 @@ export const TEAM_MANAGEMENT: TeamProps = {
       age: 32,
     },
   ],
-};
+}
 
 export const TEAM_REAL_ESTATE: TeamProps = {
   teamName: 'צוות נדל"ן',
@@ -64,7 +64,7 @@ export const TEAM_REAL_ESTATE: TeamProps = {
       age: 37,
     },
   ],
-};
+}
 
 export const TEAM_SOCIAL: TeamProps = {
   teamName: "צוות סושיאל",
@@ -82,7 +82,7 @@ export const TEAM_SOCIAL: TeamProps = {
       fullName: "שחר",
     },
   ],
-};
+}
 
 export const TEAM_BIZ_DEV: TeamProps = {
   teamName: "צוות פיתוח עסקי",
@@ -92,7 +92,7 @@ export const TEAM_BIZ_DEV: TeamProps = {
       fullName: "אייל",
     },
   ],
-};
+}
 
 export const SUPPORTS_FROM_CITY: TeamProps = {
   teamName: "עזרה מטעם העירייה",
@@ -105,4 +105,4 @@ export const SUPPORTS_FROM_CITY: TeamProps = {
       fullName: "טל",
     },
   ],
-};
+}

@@ -17,7 +17,7 @@ export const HOME_STRING = {
         title: "סה״כ הלוואות",
       },
       investor: {
-        title: "משקיעים",
+        title: "משקיעים פוטנציאלים",
       },
       members: {
         title: "חברים פוטנציאלים באגודה",
@@ -51,4 +51,4 @@ export const HOME_STRING = {
       subtitle: "אנחנו הבעלים. אנחנו קובעים את האופי של ירושלים.",
     },
   },
-} as const;
+} as const

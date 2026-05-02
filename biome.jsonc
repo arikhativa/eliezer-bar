@@ -8,6 +8,9 @@
     "ultracite/biome/react",
     "ultracite/biome/remix"
   ],
+  "javascript": {
+    "formatter": { "semicolons": "asNeeded" }
+  },
   "linter": {
     "rules": {
       "style": {

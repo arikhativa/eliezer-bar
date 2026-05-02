@@ -1,53 +1,53 @@
-import { useQueryClient } from "@tanstack/react-query";
-import { Link } from "@tanstack/react-router";
-import { Button } from "@workspace/ui/components/button";
+import { useQueryClient } from "@tanstack/react-query"
+import { Link } from "@tanstack/react-router"
+import { Button } from "@workspace/ui/components/button"
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@workspace/ui/components/card";
-import { Input } from "@workspace/ui/components/input";
-import { Label } from "@workspace/ui/components/label";
-import { cn } from "@workspace/ui/lib/utils";
-import { useState } from "react";
-import { HOMEPAGE_KEY } from "@/lib/queryOptions/homepage";
-import { FORGOT_PASSWORD_STRING } from "@/lib/strings/auth";
-import { supabase } from "@/lib/supabase/client";
+} from "@workspace/ui/components/card"
+import { Input } from "@workspace/ui/components/input"
+import { Label } from "@workspace/ui/components/label"
+import { cn } from "@workspace/ui/lib/utils"
+import { useState } from "react"
+import { HOMEPAGE_KEY } from "@/lib/queryOptions/homepage"
+import { FORGOT_PASSWORD_STRING } from "@/lib/strings/auth"
+import { supabase } from "@/lib/supabase/client"
 
-const siteDomain = import.meta.env.VITE_SITE_DOMAIN;
+const siteDomain = import.meta.env.VITE_SITE_DOMAIN
 
 export function ForgotPasswordForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
-  const [email, setEmail] = useState("");
-  const queryClient = useQueryClient();
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState("")
+  const queryClient = useQueryClient()
+  const [error, setError] = useState<string | null>(null)
+  const [success, setSuccess] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleForgotPassword = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError(null);
+    e.preventDefault()
+    setIsLoading(true)
+    setError(null)
 
     try {
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
         redirectTo: `${siteDomain}/update-password`,
-      });
+      })
       if (error) {
-        throw error;
+        throw error
       }
-      setSuccess(true);
-      queryClient.invalidateQueries({ queryKey: [HOMEPAGE_KEY] });
+      setSuccess(true)
+      queryClient.invalidateQueries({ queryKey: [HOMEPAGE_KEY] })
     } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : "An error occurred");
+      setError(error instanceof Error ? error.message : "An error occurred")
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -109,5 +109,5 @@ export function ForgotPasswordForm({
         </Card>
       )}
     </div>
-  );
+  )
 }

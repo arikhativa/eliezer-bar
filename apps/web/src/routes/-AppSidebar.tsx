@@ -1,12 +1,12 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query"
 import {
   type FileRouteTypes,
   Link,
   useNavigate,
   useRouterState,
-} from "@tanstack/react-router";
-import { Button } from "@workspace/ui/components/button";
-import { Separator } from "@workspace/ui/components/separator";
+} from "@tanstack/react-router"
+import { Button } from "@workspace/ui/components/button"
+import { Separator } from "@workspace/ui/components/separator"
 import {
   Sidebar,
   SidebarContent,
@@ -18,7 +18,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@workspace/ui/components/sidebar";
+} from "@workspace/ui/components/sidebar"
 import {
   Beer,
   Carrot,
@@ -26,24 +26,24 @@ import {
   DatabaseIcon,
   Home,
   type LucideIcon,
-} from "lucide-react";
-import { Fragment } from "react/jsx-runtime";
-import { useLogout } from "@/hooks/useLogout";
-import { authQO } from "@/lib/queryOptions/auth";
-import { SIDEBAR_STRINGS } from "@/lib/strings/sidebar";
-import { isAdmin } from "@/lib/utils";
+} from "lucide-react"
+import { Fragment } from "react/jsx-runtime"
+import { useLogout } from "@/hooks/useLogout"
+import { authQO } from "@/lib/queryOptions/auth"
+import { SIDEBAR_STRINGS } from "@/lib/strings/sidebar"
+import { isAdmin } from "@/lib/utils"
 
 interface SidebarItem {
-  icon: LucideIcon;
-  subItems?: SidebarItem[];
-  title: string;
-  to: FileRouteTypes["to"];
+  icon: LucideIcon
+  subItems?: SidebarItem[]
+  title: string
+  to: FileRouteTypes["to"]
 }
 
 function NavElement({ e }: { e: SidebarItem }) {
-  const router = useRouterState();
+  const router = useRouterState()
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   return (
     <SidebarMenuItem className="px-2 py-1">
@@ -53,19 +53,19 @@ function NavElement({ e }: { e: SidebarItem }) {
           navigate({
             to: e.to,
             from: "/",
-          });
+          })
         }}
       >
         <e.icon />
         <p className="test-base font-semibold">{e.title}</p>
       </SidebarMenuButton>
     </SidebarMenuItem>
-  );
+  )
 }
 
 export function AppSidebar() {
-  const logout = useLogout();
-  const { data: user } = useSuspenseQuery(authQO());
+  const logout = useLogout()
+  const { data: user } = useSuspenseQuery(authQO())
 
   const list: SidebarItem[] = [
     {
@@ -83,7 +83,7 @@ export function AppSidebar() {
       to: "/poll",
       icon: ChartColumn,
     },
-  ];
+  ]
 
   const adminList: SidebarItem[] = [
     {
@@ -91,7 +91,7 @@ export function AppSidebar() {
       to: "/home-page-data",
       icon: DatabaseIcon,
     },
-  ];
+  ]
 
   return (
     <Sidebar side="right">
@@ -150,5 +150,5 @@ export function AppSidebar() {
         )}
       </SidebarFooter>
     </Sidebar>
-  );
+  )
 }

@@ -1,12 +1,12 @@
-import { Card, CardContent, CardHeader } from "@workspace/ui/components/card";
-import female from "@/assets/female.svg";
-import male from "@/assets/male.svg";
+import { Card, CardContent, CardHeader } from "@workspace/ui/components/card"
+import female from "@/assets/female.svg"
+import male from "@/assets/male.svg"
 
 interface PersonProps {
-  age?: number;
-  fullName: string;
-  isMale?: boolean;
-  pic?: string;
+  age?: number
+  fullName: string
+  isMale?: boolean
+  pic?: string
 }
 
 function Pearson({ isMale, fullName, age, pic }: PersonProps) {
@@ -29,12 +29,12 @@ function Pearson({ isMale, fullName, age, pic }: PersonProps) {
         {age ? <p>{`${fullName}, ${age}`}</p> : <p>{fullName}</p>}
       </CardContent>
     </Card>
-  );
+  )
 }
 
 export interface TeamProps {
-  list: PersonProps[];
-  teamName: string;
+  list: PersonProps[]
+  teamName: string
 }
 
 export function TeamSection({ teamName, list }: TeamProps) {
@@ -47,5 +47,5 @@ export function TeamSection({ teamName, list }: TeamProps) {
         ))}
       </div>
     </div>
-  );
+  )
 }
