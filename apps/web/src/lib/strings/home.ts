@@ -70,7 +70,7 @@ export const HOME_STRING = {
     },
     effect: {
       title: "משפיעים",
-      subtitle: "אנחנו הבעלים. אנחנו קובעים את האופי של ירושלים.",
+      subtitle: "אנחנו הבעלים. אנחנו קובעים את האופי של הבר.",
     },
   },
 } as const
